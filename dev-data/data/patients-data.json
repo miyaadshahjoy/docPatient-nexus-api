@@ -1,0 +1,266 @@
+[
+  {
+    "fullName": "John Doe",
+    "email": "john.doe@example.com",
+    "phone": "123-456-7890",
+    "profilePicture": "https://example.com/images/john-doe.jpg",
+    "gender": "Male",
+    "dateOfBirth": "1985-03-15",
+    "bloodGroup": "A+",
+    "allergies": ["Penicillin", "Peanuts"],
+    "chronicConditions": ["Diabetes"],
+    "currentMedications": ["Metformin"],
+    "familyHistory": ["Heart Disease"],
+    "emergencyContact": {
+      "name": "Jane Doe",
+      "phone": "987-654-3210",
+      "relationship": "Wife"
+    },
+    "address": {
+      "street": "123 Elm Street",
+      "city": "Springfield",
+      "state": "IL",
+      "postalCode": "62704"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "64f7385c9f91e89c1e9d7482",
+        "date": "2024-11-20",
+        "reason": "Annual Checkup",
+        "prescription": "Vitamin D supplements"
+      }
+    ],
+    "lastVisitDate": "2024-11-20"
+  },
+  {
+    "fullName": "Alice Smith",
+    "email": "alice.smith@example.com",
+    "phone": "234-567-8901",
+    "profilePicture": "https://example.com/images/alice-smith.jpg",
+    "gender": "Female",
+    "dateOfBirth": "1990-07-12",
+    "bloodGroup": "O+",
+    "allergies": ["Dust"],
+    "chronicConditions": ["Asthma"],
+    "currentMedications": ["Inhaler"],
+    "familyHistory": ["Allergies"],
+    "emergencyContact": {
+      "name": "Robert Smith",
+      "phone": "876-543-2109",
+      "relationship": "Husband"
+    },
+    "address": {
+      "street": "456 Oak Avenue",
+      "city": "Chicago",
+      "state": "IL",
+      "postalCode": "60616"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "64f7385c9f91e89c1e9d7483",
+        "date": "2024-11-10",
+        "reason": "Wheezing",
+        "prescription": "Inhaler usage instructions"
+      }
+    ],
+    "lastVisitDate": "2024-11-10"
+  },
+  {
+    "fullName": "Michael Johnson",
+    "email": "michael.johnson@example.com",
+    "phone": "345-678-9012",
+    "profilePicture": "https://example.com/images/michael-johnson.jpg",
+    "gender": "Male",
+    "dateOfBirth": "1978-01-20",
+    "bloodGroup": "B+",
+    "allergies": [],
+    "chronicConditions": ["Hypertension"],
+    "currentMedications": ["Amlodipine"],
+    "familyHistory": ["Hypertension"],
+    "emergencyContact": {
+      "name": "Sarah Johnson",
+      "phone": "765-432-1098",
+      "relationship": "Daughter"
+    },
+    "address": {
+      "street": "789 Maple Drive",
+      "city": "Houston",
+      "state": "TX",
+      "postalCode": "77002"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "64f7385c9f91e89c1e9d7484",
+        "date": "2024-11-15",
+        "reason": "Blood Pressure Check",
+        "prescription": "Adjust dosage of Amlodipine"
+      }
+    ],
+    "lastVisitDate": "2024-11-15"
+  },
+  {
+    "fullName": "Emily Davis",
+    "email": "emily.davis@example.com",
+    "phone": "456-789-0123",
+    "profilePicture": "https://example.com/images/emily-davis.jpg",
+    "gender": "Female",
+    "dateOfBirth": "1992-04-25",
+    "bloodGroup": "AB+",
+    "allergies": ["Gluten"],
+    "chronicConditions": [],
+    "currentMedications": [],
+    "familyHistory": ["Celiac Disease"],
+    "emergencyContact": {
+      "name": "Daniel Davis",
+      "phone": "654-321-0987",
+      "relationship": "Brother"
+    },
+    "address": {
+      "street": "321 Pine Street",
+      "city": "Los Angeles",
+      "state": "CA",
+      "postalCode": "90001"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "64f7385c9f91e89c1e9d7485",
+        "date": "2024-10-30",
+        "reason": "Abdominal Pain",
+        "prescription": "Gluten-free diet plan"
+      }
+    ],
+    "lastVisitDate": "2024-10-30"
+  },
+  {
+    "fullName": "David Wilson",
+    "email": "david.wilson@example.com",
+    "phone": "567-890-1234",
+    "profilePicture": "https://example.com/images/david-wilson.jpg",
+    "gender": "Male",
+    "dateOfBirth": "1965-12-10",
+    "bloodGroup": "O-",
+    "allergies": [],
+    "chronicConditions": ["Arthritis"],
+    "currentMedications": ["Painkillers"],
+    "familyHistory": ["Arthritis"],
+    "emergencyContact": {
+      "name": "Laura Wilson",
+      "phone": "543-210-9876",
+      "relationship": "Spouse"
+    },
+    "address": {
+      "street": "654 Cedar Lane",
+      "city": "Miami",
+      "state": "FL",
+      "postalCode": "33101"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "64f7385c9f91e89c1e9d7486",
+        "date": "2024-11-05",
+        "reason": "Joint Pain",
+        "prescription": "Physical therapy sessions"
+      }
+    ],
+    "lastVisitDate": "2024-11-05"
+  },
+  {
+    "fullName": "Sophia Martinez",
+    "email": "sophia.martinez@example.com",
+    "phone": "678-901-2345",
+    "profilePicture": "https://example.com/images/sophia-martinez.jpg",
+    "gender": "Female",
+    "dateOfBirth": "2000-06-15",
+    "bloodGroup": "O+",
+    "allergies": [],
+    "chronicConditions": ["Anemia"],
+    "currentMedications": ["Iron Supplements"],
+    "familyHistory": ["Anemia"],
+    "emergencyContact": {
+      "name": "Carlos Martinez",
+      "phone": "654-321-2345",
+      "relationship": "Father"
+    },
+    "address": {
+      "street": "159 Evergreen Terrace",
+      "city": "Austin",
+      "state": "TX",
+      "postalCode": "78701"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "64f7385c9f91e89c1e9d7487",
+        "date": "2024-11-25",
+        "reason": "Fatigue",
+        "prescription": "Iron supplements"
+      }
+    ],
+    "lastVisitDate": "2024-11-25"
+  },
+  {
+    "fullName": "Liam Harris",
+    "email": "liam.harris@example.com",
+    "phone": "901-234-5678",
+    "profilePicture": "https://example.com/images/liam-harris.jpg",
+    "gender": "Male",
+    "dateOfBirth": "1995-10-05",
+    "bloodGroup": "AB-",
+    "allergies": ["Latex"],
+    "chronicConditions": [],
+    "currentMedications": [],
+    "familyHistory": [],
+    "emergencyContact": {
+      "name": "Emma Harris",
+      "phone": "543-210-9876",
+      "relationship": "Sister"
+    },
+    "address": {
+      "street": "357 Oakridge Lane",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98101"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "64f7385c9f91e89c1e9d7488",
+        "date": "2024-11-12",
+        "reason": "Skin Irritation",
+        "prescription": "Latex-free products"
+      }
+    ],
+    "lastVisitDate": "2024-11-12"
+  },
+  {
+    "fullName": "Olivia Brown",
+    "email": "olivia.brown@example.com",
+    "phone": "345-678-9123",
+    "profilePicture": "https://example.com/images/olivia-brown.jpg",
+    "gender": "Female",
+    "dateOfBirth": "1998-08-01",
+    "bloodGroup": "A-",
+    "allergies": ["Seafood"],
+    "chronicConditions": [],
+    "currentMedications": [],
+    "familyHistory": ["Allergies"],
+    "emergencyContact": {
+      "name": "Olivia Clark",
+      "phone": "210-987-6543",
+      "relationship": "Mother"
+    },
+    "address": {
+      "street": "246 Birchwood Road",
+      "city": "Denver",
+      "state": "CO",
+      "postalCode": "80201"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "64f7385c9f91e89c1e9d7489",
+        "date": "2024-11-03",
+        "reason": "Allergic Reaction",
+        "prescription": "Antihistamines"
+      }
+    ],
+    "lastVisitDate": "2024-11-03"
+  }
+]

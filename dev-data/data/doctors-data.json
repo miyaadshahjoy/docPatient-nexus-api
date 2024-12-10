@@ -1,0 +1,246 @@
+[
+  {
+    "fullName": "Dr. John Smith",
+    "email": "john.smith@example.com",
+    "phone": "123-456-7890",
+    "profilePicture": "https://example.com/images/john-smith.jpg",
+    "specialization": "Cardiology",
+    "qualification": ["MBBS", "MD (Cardiology)"],
+    "experience": 10,
+    "licenseNumber": "DOC12345CAR",
+    "clinicName": "Heart Care Clinic",
+    "workAddres": {
+      "street": "123 Main Street",
+      "city": "New York",
+      "state": "NY",
+      "postalCode": "10001"
+    },
+    "availibilitySchedule": [
+      {
+        "day": "Monday",
+        "timeSlots": ["10:00 AM - 12:00 PM", "3:00 PM - 5:00 PM"]
+      },
+      { "day": "Wednesday", "timeSlots": ["9:00 AM - 11:00 AM"] },
+      { "day": "Friday", "timeSlots": ["1:00 PM - 4:00 PM"] }
+    ],
+    "appointmentDuration": 30,
+    "averageRating": 4.7,
+    "reviewsCount": 120
+  },
+  {
+    "fullName": "Dr. Emily Davis",
+    "email": "emily.davis@example.com",
+    "phone": "987-654-3210",
+    "profilePicture": "https://example.com/images/emily-davis.jpg",
+    "specialization": "Dermatology",
+    "qualification": ["MBBS", "MD (Dermatology)"],
+    "experience": 8,
+    "licenseNumber": "DOC98765DER",
+    "clinicName": "Skin Care Center",
+    "workAddres": {
+      "street": "456 Elm Street",
+      "city": "Los Angeles",
+      "state": "CA",
+      "postalCode": "90001"
+    },
+    "availibilitySchedule": [
+      { "day": "Tuesday", "timeSlots": ["10:00 AM - 1:00 PM"] },
+      { "day": "Thursday", "timeSlots": ["2:00 PM - 5:00 PM"] }
+    ],
+    "appointmentDuration": 20,
+    "averageRating": 4.8,
+    "reviewsCount": 95
+  },
+  {
+    "fullName": "Dr. Michael Brown",
+    "email": "michael.brown@example.com",
+    "phone": "456-789-1230",
+    "profilePicture": "https://example.com/images/michael-brown.jpg",
+    "specialization": "Orthopedics",
+    "qualification": ["MBBS", "MS (Orthopedics)"],
+    "experience": 15,
+    "licenseNumber": "DOC45678ORT",
+    "clinicName": "Bone & Joint Clinic",
+    "workAddres": {
+      "street": "789 Oak Avenue",
+      "city": "Chicago",
+      "state": "IL",
+      "postalCode": "60601"
+    },
+    "availibilitySchedule": [
+      { "day": "Monday", "timeSlots": ["8:00 AM - 12:00 PM"] },
+      { "day": "Thursday", "timeSlots": ["1:00 PM - 5:00 PM"] }
+    ],
+    "appointmentDuration": 40,
+    "averageRating": 4.5,
+    "reviewsCount": 75
+  },
+  {
+    "fullName": "Dr. Sophia Martinez",
+    "email": "sophia.martinez@example.com",
+    "phone": "321-654-9870",
+    "profilePicture": "https://example.com/images/sophia-martinez.jpg",
+    "specialization": "Pediatrics",
+    "qualification": ["MBBS", "MD (Pediatrics)"],
+    "experience": 6,
+    "licenseNumber": "DOC32165PED",
+    "clinicName": "Children's Health Clinic",
+    "workAddres": {
+      "street": "123 Maple Lane",
+      "city": "Houston",
+      "state": "TX",
+      "postalCode": "77001"
+    },
+    "availibilitySchedule": [
+      { "day": "Tuesday", "timeSlots": ["9:00 AM - 12:00 PM"] },
+      { "day": "Friday", "timeSlots": ["10:00 AM - 2:00 PM"] }
+    ],
+    "appointmentDuration": 25,
+    "averageRating": 4.9,
+    "reviewsCount": 60
+  },
+  {
+    "fullName": "Dr. William Johnson",
+    "email": "william.johnson@example.com",
+    "phone": "789-123-4560",
+    "profilePicture": "https://example.com/images/william-johnson.jpg",
+    "specialization": "Neurology",
+    "qualification": ["MBBS", "DM (Neurology)"],
+    "experience": 12,
+    "licenseNumber": "DOC78945NEU",
+    "clinicName": "Brain & Spine Institute",
+    "workAddres": {
+      "street": "567 Birch Road",
+      "city": "Phoenix",
+      "state": "AZ",
+      "postalCode": "85001"
+    },
+    "availibilitySchedule": [
+      { "day": "Monday", "timeSlots": ["9:00 AM - 11:00 AM"] },
+      { "day": "Wednesday", "timeSlots": ["2:00 PM - 4:00 PM"] }
+    ],
+    "appointmentDuration": 30,
+    "averageRating": 4.6,
+    "reviewsCount": 110
+  },
+  {
+    "fullName": "Dr. Olivia Wilson",
+    "email": "olivia.wilson@example.com",
+    "phone": "123-987-6540",
+    "profilePicture": "https://example.com/images/olivia-wilson.jpg",
+    "specialization": "Gynecology",
+    "qualification": ["MBBS", "MD (Gynecology)"],
+    "experience": 7,
+    "licenseNumber": "DOC123GYNC",
+    "clinicName": "Women's Health Center",
+    "workAddres": {
+      "street": "234 Pine Street",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98101"
+    },
+    "availibilitySchedule": [
+      { "day": "Tuesday", "timeSlots": ["10:00 AM - 1:00 PM"] },
+      { "day": "Thursday", "timeSlots": ["3:00 PM - 6:00 PM"] }
+    ],
+    "appointmentDuration": 20,
+    "averageRating": 4.8,
+    "reviewsCount": 85
+  },
+  {
+    "fullName": "Dr. James Anderson",
+    "email": "james.anderson@example.com",
+    "phone": "456-321-7890",
+    "profilePicture": "https://example.com/images/james-anderson.jpg",
+    "specialization": "Oncology",
+    "qualification": ["MBBS", "MD (Oncology)"],
+    "experience": 11,
+    "licenseNumber": "DOC45678ONC",
+    "clinicName": "Cancer Care Center",
+    "workAddres": {
+      "street": "567 Cancer Lane",
+      "city": "Boston",
+      "state": "MA",
+      "postalCode": "02101"
+    },
+    "availibilitySchedule": [
+      { "day": "Wednesday", "timeSlots": ["10:00 AM - 2:00 PM"] },
+      { "day": "Saturday", "timeSlots": ["11:00 AM - 3:00 PM"] }
+    ],
+    "appointmentDuration": 45,
+    "averageRating": 4.7,
+    "reviewsCount": 150
+  },
+  {
+    "fullName": "Dr. Mia Thompson",
+    "email": "mia.thompson@example.com",
+    "phone": "321-987-6540",
+    "profilePicture": "https://example.com/images/mia-thompson.jpg",
+    "specialization": "Ophthalmology",
+    "qualification": ["MBBS", "MS (Ophthalmology)"],
+    "experience": 9,
+    "licenseNumber": "DOC32154OPH",
+    "clinicName": "Vision Care Clinic",
+    "workAddres": {
+      "street": "234 Vision Avenue",
+      "city": "Denver",
+      "state": "CO",
+      "postalCode": "80201"
+    },
+    "availibilitySchedule": [
+      { "day": "Monday", "timeSlots": ["9:00 AM - 12:00 PM"] },
+      { "day": "Thursday", "timeSlots": ["1:00 PM - 4:00 PM"] }
+    ],
+    "appointmentDuration": 20,
+    "averageRating": 4.5,
+    "reviewsCount": 70
+  },
+  {
+    "fullName": "Dr. Henry Lee",
+    "email": "henry.lee@example.com",
+    "phone": "654-321-9870",
+    "profilePicture": "https://example.com/images/henry-lee.jpg",
+    "specialization": "Psychiatry",
+    "qualification": ["MBBS", "MD (Psychiatry)"],
+    "experience": 14,
+    "licenseNumber": "DOC65498PSY",
+    "clinicName": "Mental Health Center",
+    "workAddres": {
+      "street": "678 Peace Boulevard",
+      "city": "San Francisco",
+      "state": "CA",
+      "postalCode": "94101"
+    },
+    "availibilitySchedule": [
+      { "day": "Tuesday", "timeSlots": ["11:00 AM - 2:00 PM"] },
+      { "day": "Friday", "timeSlots": ["3:00 PM - 6:00 PM"] }
+    ],
+    "appointmentDuration": 50,
+    "averageRating": 4.9,
+    "reviewsCount": 200
+  },
+  {
+    "fullName": "Dr. Isabella Walker",
+    "email": "isabella.walker@example.com",
+    "phone": "789-654-1230",
+    "profilePicture": "https://example.com/images/isabella-walker.jpg",
+    "specialization": "ENT Specialist",
+    "qualification": ["MBBS", "MS (ENT)"],
+    "experience": 8,
+    "licenseNumber": "DOC78945ENT",
+    "clinicName": "Ear, Nose & Throat Center",
+    "workAddres": {
+      "street": "123 Sound Street",
+      "city": "Austin",
+      "state": "TX",
+      "postalCode": "73301"
+    },
+    "availibilitySchedule": [
+      { "day": "Wednesday", "timeSlots": ["9:00 AM - 11:00 AM"] },
+      { "day": "Saturday", "timeSlots": ["12:00 PM - 3:00 PM"] }
+    ],
+    "appointmentDuration": 30,
+    "averageRating": 4.6,
+    "reviewsCount": 90
+  }
+]
