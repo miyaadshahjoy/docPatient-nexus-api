@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const patientSchema = mongoose.Schema({
   fullName: {
     type: String,
-    unique: true,
+    unique: true, // The unique Option is Not a Validator
     required: [true, 'a patient must have a name'],
   },
   email: {

@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "set NODE_ENV=development&&nodemon server.js",
+    "start:prod": "set NODE_ENV=production&&nodemon server.js"
   },
   "author": "Miyaad J",
   "license": "ISC",

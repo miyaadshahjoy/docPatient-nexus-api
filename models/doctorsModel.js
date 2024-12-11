@@ -3,8 +3,10 @@ const mongoose = require('mongoose');
 const doctorSchema = mongoose.Schema({
   fullName: {
     type: String,
-    unique: true,
+    unique: true, // The unique Option is Not a Validator
     required: [true, 'a doctor must have a name'],
+    minlength: [10, 'Name should have atleast 10 characters'],
+    maxlength: [30, 'A name should not have more than 30 characters'],
   },
   email: {
     type: String,
@@ -50,6 +52,8 @@ const doctorSchema = mongoose.Schema({
   averageRating: {
     type: Number,
     default: 4.5,
+    min: [1.0, 'Rating must be at least 1.0 or greater'],
+    max: [5.0, 'Rating must not be more than 5.0'],
   },
   reviewsCount: {
     type: Number,
