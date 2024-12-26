@@ -1,8 +1,11 @@
 const express = require('express');
 
 const doctorsController = require('./../controllers/doctorsController');
+const authController = require('./../controllers/authController');
 
 const router = express.Router('/api/v1/doctors');
+router.post('/signup', authController.signupDoctor);
+router.post('/signin', authController.signinDoctor);
 
 router
   .route('/')

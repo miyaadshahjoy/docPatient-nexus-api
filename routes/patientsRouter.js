@@ -1,10 +1,11 @@
 const express = require('express');
 const patientsController = require('./../controllers/patientsController');
+const authController = require('./../controllers/authController');
 const router = express.Router('/api/v1/patients');
 
 router
   .route('/')
-  .get(patientsController.getAllPatients)
+  .get(authController.protect, patientsController.getAllPatients)
   .post(patientsController.addPatient);
 router
   .route('/:id')
