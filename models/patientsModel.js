@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+const validator = require('validator');
+const instanceMethodsPlugin = require('../utils/instanceMethodsPlugin');
+const passwordEncryption = require('../utils/passwordEncryption');
 
 const patientSchema = mongoose.Schema({
   fullName: {
@@ -9,6 +12,7 @@ const patientSchema = mongoose.Schema({
   email: {
     type: String,
     required: [true, 'a patient must have an email'],
+    validate: [validator.isEmail, 'Provide a valid email'],
   },
   phone: {
     type: String,
@@ -63,7 +67,34 @@ const patientSchema = mongoose.Schema({
     type: Date,
     required: true,
   },
+  password: {
+    type: String,
+    required: true,
+    minlength: [8, 'Password must contain atleast 8 characters.'],
+    select: false,
+  },
+  passwordConfirm: {
+    type: String,
+    required: true,
+    validate: {
+      validator: function (el) {
+        return el === this.password;
+      },
+      message: 'Passwords are not same...🚫🚫',
+    },
+  },
+  role: {
+    type: String,
+    default: 'patient',
+  },
+  passwordChangedAt: Date,
 });
+
+// middlewares
+patientSchema.pre('save', passwordEncryption);
+
+// Instance methods
+patientSchema.plugin(instanceMethodsPlugin);
 
 const Patient = mongoose.model('Patient', patientSchema);
 

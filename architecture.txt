@@ -1,0 +1,6 @@
+Responsibilities of an Admin:
+    User management:
+        Manage Doctors:
+            add new Doctors
+        Manage Patients:
+    Appointment management:

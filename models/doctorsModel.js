@@ -1,5 +1,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const instanceMethodsPlugin = require('../utils/instanceMethodsPlugin');
+const passwordEncryption = require('./../utils/passwordEncryption');
+
 const doctorSchema = new mongoose.Schema({
   fullName: {
     type: String,
@@ -77,31 +80,19 @@ const doctorSchema = new mongoose.Schema({
       message: 'Passwords are not the same🚫🚫',
     },
   },
+  role: {
+    type: String,
+    default: 'doctor',
+  },
   passwordChangedAt: Date,
 });
 
 // middlewares
-doctorSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  // TODO: Encrypt the password
-  const encryptedPassword = await bcrypt.hash(this.password, 12);
-  this.password = encryptedPassword;
-  // TODO: Delete the passwordConfirm field
-  this.passwordConfirm = undefined;
-  next();
-});
+doctorSchema.pre('save', passwordEncryption);
 
 // Instance methods
-doctorSchema.methods.correctPassword = async function (
-  candidatePassword,
-  userPassword
-) {
-  return await bcrypt.compare(candidatePassword, userPassword);
-};
+doctorSchema.plugin(instanceMethodsPlugin);
 
-doctorSchema.methods.passwordChangedAfter = function (JWTTimestamp) {
-  return JWTTimestamp < this.passwordChangedAt.getTime() / 1000;
-};
 const Doctor = mongoose.model('Doctor', doctorSchema);
 
 module.exports = Doctor;
