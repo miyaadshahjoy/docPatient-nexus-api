@@ -2,6 +2,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const instanceMethodsPlugin = require('../utils/instanceMethodsPlugin');
 const passwordEncryption = require('./../utils/passwordEncryption');
+const passwordChangedAtModify = require('../utils/passwordChangedAtModify');
+const { patientSchema } = require('./patientsModel');
 
 const doctorSchema = new mongoose.Schema({
   fullName: {
@@ -85,6 +87,14 @@ const doctorSchema = new mongoose.Schema({
     default: 'doctor',
   },
   passwordChangedAt: Date,
+  passwordResetToken: String,
+  passwordResetTokenExpire: Date,
+  emailVerificationToken: String,
+  emailVerificationTokenExpire: Date,
+  emailVerified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // middlewares
@@ -92,6 +102,7 @@ doctorSchema.pre('save', passwordEncryption);
 
 // Instance methods
 doctorSchema.plugin(instanceMethodsPlugin);
+doctorSchema.pre('save', passwordChangedAtModify);
 
 const Doctor = mongoose.model('Doctor', doctorSchema);
 

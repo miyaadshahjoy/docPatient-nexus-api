@@ -3,6 +3,7 @@ const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const instanceMethodsPlugin = require('../utils/instanceMethodsPlugin');
 const passwordEncryption = require('../utils/passwordEncryption');
+const passwordChangedAtModify = require('./../utils/passwordChangedAtModify');
 
 // TODO: Admin Schema
 const adminSchema = new mongoose.Schema({
@@ -42,6 +43,15 @@ const adminSchema = new mongoose.Schema({
     required: true,
     default: 'admin',
   },
+  passwordChangedAt: Date,
+  passwordResetToken: String,
+  passwordResetTokenExpire: Date,
+  emailVerificationToken: String,
+  emailVerificationTokenExpire: Date,
+  emailVerified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 // middlewares
@@ -49,6 +59,7 @@ adminSchema.pre('save', passwordEncryption);
 
 // Instance methods
 adminSchema.plugin(instanceMethodsPlugin);
+adminSchema.pre('save', passwordChangedAtModify);
 
 // Admin Model
 const Admin = mongoose.model('Admin', adminSchema);

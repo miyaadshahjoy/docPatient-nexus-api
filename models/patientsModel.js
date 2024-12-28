@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const instanceMethodsPlugin = require('../utils/instanceMethodsPlugin');
 const passwordEncryption = require('../utils/passwordEncryption');
+const passwordChangedAtModify = require('./../utils/passwordChangedAtModify');
 
 const patientSchema = mongoose.Schema({
   fullName: {
@@ -88,10 +89,21 @@ const patientSchema = mongoose.Schema({
     default: 'patient',
   },
   passwordChangedAt: Date,
+  passwordResetToken: String,
+  passwordResetTokenExpire: Date,
+
+  emailVerificationToken: String,
+  emailVerificationTokenExpire: Date,
+  emailVerified: {
+    type: Boolean,
+    default: false,
+  },
 });
+exports.patientSchema = patientSchema;
 
 // middlewares
 patientSchema.pre('save', passwordEncryption);
+patientSchema.pre('save', passwordChangedAtModify);
 
 // Instance methods
 patientSchema.plugin(instanceMethodsPlugin);
