@@ -30,6 +30,17 @@ const clearRoleFromCookie = function (res) {
   res.clearCookie('role');
 };*/
 
+// Impl: Filter Object
+const filterObject = function (obj, notAllowedFields) {
+  const filteredObject = {};
+  Object.keys(obj).forEach((el) => {
+    if (!notAllowedFields.includes(el)) {
+      filteredObject[el] = obj[el];
+    }
+  });
+  return filteredObject;
+};
+
 // Impl: Email Verification
 const sendEmailVerificationToken = async function (req, next, user) {
   // TODO: 1) Create email verification token
@@ -262,6 +273,8 @@ exports.verifyEmail = catchAsync(async (req, res, next) => {
   )
     return next(new AppError('Token is invalid or has expired', 400));
   currentUser.emailVerified = true;
+  currentUser.emailVerificationToken = undefined;
+  currentUser.emailVerificationTokenExpire = undefined;
   await currentUser.save({
     validateBeforeSave: false,
   });
@@ -275,6 +288,92 @@ exports.verifyEmail = catchAsync(async (req, res, next) => {
   });
 });
 
+// Impl: Update Password
+
+exports.updatePassword = function (Model) {
+  return catchAsync(async (req, res, next) => {
+    // TODO: 1) Get user from the collection
+    const currentUser = await Model.findById(req.user).select('+password');
+    // TODO: 2) Check if POSTed current password is correct
+    if (
+      !(await currentUser.correctPassword(
+        req.body.currentPassword,
+        currentUser.password
+      ))
+    )
+      return next(new AppError('Incorrect Password!...🚫🚫'));
+
+    // TODO: 3) If current password is correct, update the password
+    currentUser.password = req.body.updatedPassword;
+    currentUser.save({ validateBeforeSave: false });
+    // TODO: 4) Log user in, send JWT
+    const token = signToken(currentUser._id);
+    res.status(200);
+    res.json({
+      status: 'success',
+      token,
+      data: {
+        user: currentUser, // FIXME: Password is visible on the client
+      },
+    });
+  });
+};
+
+// Impl: Update current user account
+const updateUserAccount = function (Model) {
+  return catchAsync(async (req, res, next) => {
+    // TODO: 1) Create error if user POSTs password data
+    if (req.body.password)
+      return next(
+        new AppError(
+          'You can not update your password from this route. You can use the /updatePassword route',
+          400
+        )
+      );
+    // TODO: 2) Filter out unwanted fields names that are not allowed to be updated
+    const notAllowedFields = [
+      'email', // FIXME: make email updateable
+      'role',
+      'averageRating',
+      'emailVerified',
+    ];
+    const filteredObject = filterObject(req.body, notAllowedFields);
+
+    // TODO: 3) Update user document
+
+    const updatedUser = await Model.findOneAndUpdate(
+      { _id: req.user.id },
+      filteredObject,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    const token = signToken(updatedUser._id);
+    res.status(200);
+    res.json({
+      status: 'success',
+      token,
+      data: {
+        user: updatedUser,
+      },
+    });
+  });
+};
+
+// Impl: Delete current user account
+
+const deleteUserAccount = function (Model) {
+  return catchAsync(async (req, res, next) => {
+    await Model.findByIdAndUpdate(req.user.id, { active: false });
+    res.status(204);
+    res.json({
+      status: 'Success',
+      data: null,
+    });
+  });
+};
 // SIGN UP
 exports.signupAdmin = signup(Admin);
 exports.signupDoctor = signup(Doctor);
@@ -289,3 +388,13 @@ exports.signinPatient = signin(Patient);
 exports.restrictToAdmin = restrict('admin');
 exports.restrictToDoctor = restrict('doctor');
 exports.restrictToPatient = restrict('patient');
+
+// UPDATE USER ACCOUNTS
+exports.updateAdminAccount = updateUserAccount(Admin);
+exports.updateDoctorAccount = updateUserAccount(Doctor);
+exports.updatePatientAccount = updateUserAccount(Patient);
+
+// DELETE USER ACCOUNTS
+exports.deleteAdminAccount = deleteUserAccount(Admin);
+exports.deleteDoctorAccount = deleteUserAccount(Doctor);
+exports.deletePatientAccount = deleteUserAccount(Patient);

@@ -24,5 +24,19 @@ router.get(
   authController.protect(Admin),
   authController.verifyEmail
 );
-
+router.post(
+  '/updateAccount',
+  authController.protect(Admin),
+  authController.updateAdminAccount
+);
+router.post(
+  '/updatePassword',
+  authController.protect(Admin),
+  authController.updatePassword(Admin)
+);
+router.delete(
+  '/deleteAccount',
+  authController.protect(Admin),
+  authController.deleteAdminAccount
+);
 module.exports = router;

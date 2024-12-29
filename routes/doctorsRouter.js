@@ -32,6 +32,22 @@ router.get(
   authController.verifyEmail
 );
 
+router.post(
+  '/updatePassword',
+  authController.protect(Doctor),
+  authController.updatePassword(Doctor)
+);
+router.post(
+  '/updateAccount',
+  authController.protect(Doctor),
+  authController.updateDoctorAccount
+);
+router.delete(
+  '/deleteAccount',
+  authController.protect(Doctor),
+  authController.deleteDoctorAccount
+);
+
 router
   .route('/')
   .get(doctorsController.getAllDoctors)

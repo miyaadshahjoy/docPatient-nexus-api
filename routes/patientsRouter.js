@@ -29,6 +29,23 @@ router.get(
   authController.protect(Patient),
   authController.verifyEmail
 );
+router.post(
+  '/updatePassword',
+  authController.protect(Patient),
+  authController.updatePassword(Patient)
+);
+
+router.post(
+  '/updateAccount',
+  authController.protect(Patient),
+  authController.updatePatientAccount
+);
+
+router.delete(
+  '/deleteAccount',
+  authController.protect(Patient),
+  authController.deletePatientAccount
+);
 router
   .route('/')
   .get(authController.protect(Patient), patientsController.getAllPatients)

@@ -98,6 +98,10 @@ const patientSchema = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  active: {
+    type: Boolean,
+    default: true,
+  },
 });
 exports.patientSchema = patientSchema;
 
