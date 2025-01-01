@@ -14,6 +14,19 @@ const signToken = (id) => {
   });
 };
 
+// Impl: Send JWT token
+const sendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+  res.status(statusCode);
+  res.json({
+    status: 'success',
+    token,
+    data: {
+      user,
+    },
+  });
+};
+
 // Impl: store user role on cookies
 const storeRoleOnCookie = function (role, res) {
   const cookieOptions = {
@@ -129,16 +142,8 @@ const signup = function (Model) {
 
     // TODO: send Email verification email
     sendEmailVerificationToken(req, next, user);
-    const token = signToken(user._id);
     storeRoleOnCookie(user.role, res);
-    res.status(201);
-    res.json({
-      status: 'success',
-      token,
-      data: {
-        user,
-      },
-    });
+    sendToken(user, 201, res);
   });
 };
 
@@ -154,19 +159,10 @@ const signin = function (Model) {
     if (!user || !(await user.correctPassword(password, user.password)))
       return next(new AppError('Incorrect email or password', 401));
     // TODO: 3) If everything is ok, send token to client
-    const token = signToken(user._id);
+    storeRoleOnCookie(user.role, res);
     // clearRoleFromCookie(res);
 
-    storeRoleOnCookie(user.role, res);
-
-    res.status(200);
-    res.json({
-      status: 'success',
-      token,
-      data: {
-        user,
-      },
-    });
+    sendToken(user, 200, res);
   });
 };
 
@@ -249,15 +245,7 @@ exports.resetPassword = function (Model) {
 
     // TODO: 3) Update passwordChangedAt property for the user
     // TODO: 4) Log the user in, Send JWT
-    const token = signToken(currentUser._id);
-    res.status(200);
-    res.json({
-      status: 'success',
-      token,
-      data: {
-        currentUser,
-      },
-    });
+    sendToken(currentUser, 200, res);
   });
 };
 
@@ -278,14 +266,7 @@ exports.verifyEmail = catchAsync(async (req, res, next) => {
   await currentUser.save({
     validateBeforeSave: false,
   });
-  const token = signToken(currentUser._id);
-  res.status(200);
-  res.json({
-    status: 'success',
-    token,
-    message: 'Email is verified!',
-    data: { user: currentUser },
-  });
+  sendToken(currentUser, 200, res);
 });
 
 // Impl: Update Password
@@ -307,73 +288,11 @@ exports.updatePassword = function (Model) {
     currentUser.password = req.body.updatedPassword;
     currentUser.save({ validateBeforeSave: false });
     // TODO: 4) Log user in, send JWT
-    const token = signToken(currentUser._id);
-    res.status(200);
-    res.json({
-      status: 'success',
-      token,
-      data: {
-        user: currentUser, // FIXME: Password is visible on the client
-      },
-    });
+    // FIXME: Password is visible on the client
+    sendToken(currentUser, 200, res);
   });
 };
 
-// Impl: Update current user account
-const updateUserAccount = function (Model) {
-  return catchAsync(async (req, res, next) => {
-    // TODO: 1) Create error if user POSTs password data
-    if (req.body.password)
-      return next(
-        new AppError(
-          'You can not update your password from this route. You can use the /updatePassword route',
-          400
-        )
-      );
-    // TODO: 2) Filter out unwanted fields names that are not allowed to be updated
-    const notAllowedFields = [
-      'email', // FIXME: make email updateable
-      'role',
-      'averageRating',
-      'emailVerified',
-    ];
-    const filteredObject = filterObject(req.body, notAllowedFields);
-
-    // TODO: 3) Update user document
-
-    const updatedUser = await Model.findOneAndUpdate(
-      { _id: req.user.id },
-      filteredObject,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
-
-    const token = signToken(updatedUser._id);
-    res.status(200);
-    res.json({
-      status: 'success',
-      token,
-      data: {
-        user: updatedUser,
-      },
-    });
-  });
-};
-
-// Impl: Delete current user account
-
-const deleteUserAccount = function (Model) {
-  return catchAsync(async (req, res, next) => {
-    await Model.findByIdAndUpdate(req.user.id, { active: false });
-    res.status(204);
-    res.json({
-      status: 'Success',
-      data: null,
-    });
-  });
-};
 // SIGN UP
 exports.signupAdmin = signup(Admin);
 exports.signupDoctor = signup(Doctor);
@@ -388,13 +307,3 @@ exports.signinPatient = signin(Patient);
 exports.restrictToAdmin = restrict('admin');
 exports.restrictToDoctor = restrict('doctor');
 exports.restrictToPatient = restrict('patient');
-
-// UPDATE USER ACCOUNTS
-exports.updateAdminAccount = updateUserAccount(Admin);
-exports.updateDoctorAccount = updateUserAccount(Doctor);
-exports.updatePatientAccount = updateUserAccount(Patient);
-
-// DELETE USER ACCOUNTS
-exports.deleteAdminAccount = deleteUserAccount(Admin);
-exports.deleteDoctorAccount = deleteUserAccount(Doctor);
-exports.deletePatientAccount = deleteUserAccount(Patient);

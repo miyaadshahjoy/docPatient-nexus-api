@@ -2,6 +2,8 @@ const express = require('express');
 const patientsController = require('./../controllers/patientsController');
 const Patient = require('./../models/patientsModel');
 const authController = require('./../controllers/authController');
+const userController = require('./../controllers/userController');
+
 const Doctor = require('../models/doctorsModel');
 const router = express.Router('/api/v1/patients');
 
@@ -38,13 +40,13 @@ router.post(
 router.post(
   '/updateAccount',
   authController.protect(Patient),
-  authController.updatePatientAccount
+  userController.updatePatientAccount
 );
 
 router.delete(
   '/deleteAccount',
   authController.protect(Patient),
-  authController.deletePatientAccount
+  userController.deletePatientAccount
 );
 router
   .route('/')

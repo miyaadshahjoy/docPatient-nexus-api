@@ -1,5 +1,6 @@
 const express = require('express');
 const authController = require('./../controllers/authController');
+const userController = require('./../controllers/userController');
 const Admin = require('../models/adminsModel');
 
 const router = express.Router('/api/v1/admins');
@@ -27,7 +28,7 @@ router.get(
 router.post(
   '/updateAccount',
   authController.protect(Admin),
-  authController.updateAdminAccount
+  userController.updateAdminAccount
 );
 router.post(
   '/updatePassword',
@@ -37,6 +38,6 @@ router.post(
 router.delete(
   '/deleteAccount',
   authController.protect(Admin),
-  authController.deleteAdminAccount
+  userController.deleteAdminAccount
 );
 module.exports = router;
