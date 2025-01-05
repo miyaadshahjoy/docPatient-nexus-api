@@ -1,0 +1,37 @@
+[
+  {
+    "review": "Dr. Smith was very attentive and thorough during my check-up. Highly recommend!",
+    "rating": 5,
+    "doctor": "60d2beef9b1d4c23b4c9b1e4",
+    "patient": "60d2c1e3fc1c5b2404c9b1e5",
+    "appointment": "60d2c7b79b1d4c23b4c9b1f0"
+  },
+  {
+    "review": "The consultation was good, but the wait time was longer than expected.",
+    "rating": 3,
+    "doctor": "60d2beef9b1d4c23b4c9b1e6",
+    "patient": "60d2c1e3fc1c5b2404c9b1e7",
+    "appointment": "60d2c7b79b1d4c23b4c9b1f1"
+  },
+  {
+    "review": "Dr. Johnson provided excellent post-operative care and was very supportive.",
+    "rating": 5,
+    "doctor": "60d2beef9b1d4c23b4c9b1e8",
+    "patient": "60d2c1e3fc1c5b2404c9b1e9",
+    "appointment": "60d2c7b79b1d4c23b4c9b1f2"
+  },
+  {
+    "review": "The doctor was knowledgeable, but I felt rushed during the consultation.",
+    "rating": 4,
+    "doctor": "60d2beef9b1d4c23b4c9b1ea",
+    "patient": "60d2c1e3fc1c5b2404c9b1eb",
+    "appointment": "60d2c7b79b1d4c23b4c9b1f3"
+  },
+  {
+    "review": "Dr. Brown's treatment plan for my skin condition was effective. Very satisfied!",
+    "rating": 4,
+    "doctor": "60d2beef9b1d4c23b4c9b1ec",
+    "patient": "60d2c1e3fc1c5b2404c9b1ed",
+    "appointment": "60d2c7b79b1d4c23b4c9b1f4"
+  }
+]

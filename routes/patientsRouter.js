@@ -5,52 +5,33 @@ const authController = require('./../controllers/authController');
 const userController = require('./../controllers/userController');
 
 const Doctor = require('../models/doctorsModel');
-const router = express.Router('/api/v1/patients');
+const router = express.Router();
 
-router.post(
-  '/signup',
-  authController.protect(Doctor),
-  authController.restrictToDoctor,
-  authController.signupPatient
-);
+// express.Router({ mergeParams: true });
+
+router.post('/signup', authController.signupPatient);
 router.post('/signin', authController.signinPatient);
+router.use(authController.protect(Patient));
 router.post(
   '/forgotPassword',
-  authController.protect(Patient),
   authController.restrictToPatient,
   authController.forgotPassword(Patient)
 );
 router.post(
   '/resetPassword/:resetToken',
-  authController.protect(Patient),
   authController.restrictToPatient,
   authController.resetPassword(Patient)
 );
-router.get(
-  '/verifyEmail/:verificationToken',
-  authController.protect(Patient),
-  authController.verifyEmail
-);
-router.post(
-  '/updatePassword',
-  authController.protect(Patient),
-  authController.updatePassword(Patient)
-);
+router.get('/verifyEmail/:verificationToken', authController.verifyEmail);
+router.post('/updatePassword', authController.updatePassword(Patient));
 
-router.post(
-  '/updateAccount',
-  authController.protect(Patient),
-  userController.updatePatientAccount
-);
+router.post('/updateAccount', userController.updatePatientAccount);
 
-router.delete(
-  '/deleteAccount',
-  authController.protect(Patient),
-  userController.deletePatientAccount
-);
+router.delete('/deleteAccount', userController.deletePatientAccount);
+
 router
   .route('/')
-  .get(authController.protect(Patient), patientsController.getAllPatients)
+  .get(patientsController.getAllPatients)
   .post(patientsController.addPatient);
 router
   .route('/:id')

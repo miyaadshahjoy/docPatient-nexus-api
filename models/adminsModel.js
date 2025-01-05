@@ -9,17 +9,22 @@ const passwordChangedAtModify = require('./../utils/passwordChangedAtModify');
 const adminSchema = new mongoose.Schema({
   fullname: {
     type: String,
-    required: [true, 'Admin must have a name'],
+    unique: true, // The unique Option is Not a Validator
+    required: [true, 'Admin must provide a name'],
+    minlength: [10, 'Name should contain atleast 10 characters'],
+    maxlength: [30, 'Name should not contain more than 30 characters'],
   },
   email: {
     type: String,
-    required: [true, 'Admin must have an email'],
+    required: [true, 'Admin must provide an email'],
     unique: true,
     lowercase: true,
     validate: [validator.isEmail, 'Please provide a valid email'],
   },
   phone: {
     type: String,
+    unique: true,
+    required: true,
   },
   password: {
     type: String,
@@ -43,6 +48,12 @@ const adminSchema = new mongoose.Schema({
     required: true,
     default: 'admin',
   },
+  active: {
+    type: Boolean,
+    default: true,
+  },
+  ///////////////////////////////////
+
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetTokenExpire: Date,
@@ -51,10 +62,6 @@ const adminSchema = new mongoose.Schema({
   emailVerified: {
     type: Boolean,
     default: false,
-  },
-  active: {
-    type: Boolean,
-    default: true,
   },
 });
 

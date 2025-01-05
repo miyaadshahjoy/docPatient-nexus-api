@@ -20,18 +20,9 @@ const patientsData = fs.readFileSync(
   `${__dirname}/data/patients-data.json`,
   'utf-8'
 );
-const deleteDoctorsData = async function () {
+const deleteData = async function () {
   try {
     await Doctor.deleteMany();
-    console.log('Data deleted successfully!');
-  } catch (err) {
-    console.log(err);
-  }
-  process.exit();
-};
-
-const deletePatientsData = async function () {
-  try {
     await Patient.deleteMany();
     console.log('Data deleted successfully!');
   } catch (err) {
@@ -40,20 +31,10 @@ const deletePatientsData = async function () {
   process.exit();
 };
 
-const importDoctorsData = async function () {
+const importData = async function () {
   try {
     await Doctor.create(JSON.parse(doctorsData));
-
-    console.log('Data imported successfully!');
-  } catch (err) {
-    console.log(err);
-  }
-  process.exit();
-};
-const importPatientsData = async function () {
-  try {
     await Patient.create(JSON.parse(patientsData));
-
     console.log('Data imported successfully!');
   } catch (err) {
     console.log(err);
@@ -61,12 +42,8 @@ const importPatientsData = async function () {
   process.exit();
 };
 
-if (process.argv.at(-1) === '--deleteDoc') {
-  deleteDoctorsData();
-} else if (process.argv.at(-1) === '--deletePat') {
-  deletePatientsData();
-} else if (process.argv.at(-1) === '--importDoc') {
-  importDoctorsData();
-} else if (process.argv.at(-1) === '--importPat') {
-  importPatientsData();
+if (process.argv.at(-1) === '--delete') {
+  deleteData();
+} else if (process.argv.at(-1) === '--import') {
+  importData();
 }

@@ -24,7 +24,12 @@ exports.getAllPatients = catchAsync(async (req, res, next) => {
 
 exports.getPatient = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const patient = await Patient.findById(id);
+  const patient = await Patient.findById(id)
+    .populate({
+      path: 'doctors',
+      select: 'fullName specialization experience averageRating availibility',
+    })
+    .populate('appointments');
   if (!patient) return next(new AppError('No patient for this ID', 404));
 
   res.status(200);

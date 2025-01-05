@@ -1,0 +1,67 @@
+[
+  {
+    "doctor": "60d2beef9b1d4c23b4c9b1e4",
+    "patient": "60d2c1e3fc1c5b2404c9b1e5",
+    "appointmentDate": "2025-01-10T10:00:00Z",
+    "reason": "Routine check-up",
+    "notes": "Patient reports mild headache for the last few days.",
+    "status": "confirmed",
+    "paymentAmount": 100,
+    "paymentStatus": "pending",
+    "paymentMethod": "credit card",
+    "createdAt": "2025-01-05T00:00:00Z",
+    "updatedAt": "2025-01-05T00:00:00Z"
+  },
+  {
+    "doctor": "60d2beef9b1d4c23b4c9b1e6",
+    "patient": "60d2c1e3fc1c5b2404c9b1e7",
+    "appointmentDate": "2025-01-12T14:00:00Z",
+    "reason": "Consultation for chest pain",
+    "notes": "Patient complains of sharp pain in the chest for the last week.",
+    "status": "pending",
+    "paymentAmount": 150,
+    "paymentStatus": "pending",
+    "paymentMethod": "insurance",
+    "createdAt": "2025-01-06T00:00:00Z",
+    "updatedAt": "2025-01-06T00:00:00Z"
+  },
+  {
+    "doctor": "60d2beef9b1d4c23b4c9b1e8",
+    "patient": "60d2c1e3fc1c5b2404c9b1e9",
+    "appointmentDate": "2025-01-15T09:00:00Z",
+    "reason": "Follow-up after surgery",
+    "notes": "Patient requires a post-operative check-up for knee surgery.",
+    "status": "confirmed",
+    "paymentAmount": 200,
+    "paymentStatus": "paid",
+    "paymentMethod": "debit card",
+    "createdAt": "2025-01-07T00:00:00Z",
+    "updatedAt": "2025-01-07T00:00:00Z"
+  },
+  {
+    "doctor": "60d2beef9b1d4c23b4c9b1ea",
+    "patient": "60d2c1e3fc1c5b2404c9b1eb",
+    "appointmentDate": "2025-01-17T16:00:00Z",
+    "reason": "Consultation for skin rash",
+    "notes": "Patient has a red rash on arms and legs. Needs examination.",
+    "status": "confirmed",
+    "paymentAmount": 80,
+    "paymentStatus": "paid",
+    "paymentMethod": "cash",
+    "createdAt": "2025-01-08T00:00:00Z",
+    "updatedAt": "2025-01-08T00:00:00Z"
+  },
+  {
+    "doctor": "60d2beef9b1d4c23b4c9b1ec",
+    "patient": "60d2c1e3fc1c5b2404c9b1ed",
+    "appointmentDate": "2025-01-20T11:00:00Z",
+    "reason": "Routine dental check-up",
+    "notes": "Patient has not visited in a year, requires full check-up.",
+    "status": "pending",
+    "paymentAmount": 50,
+    "paymentStatus": "failed",
+    "paymentMethod": "credit card",
+    "createdAt": "2025-01-09T00:00:00Z",
+    "updatedAt": "2025-01-09T00:00:00Z"
+  }
+]

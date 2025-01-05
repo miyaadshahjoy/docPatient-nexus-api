@@ -35,7 +35,14 @@ exports.addDoctor = catchAsync(async (req, res, next) => {
 
 exports.getDoctor = catchAsync(async (req, res, next) => {
   const id = req.params.id;
-  const doctor = await Doctor.findById(id);
+  const doctor = await Doctor.findById(id)
+    .populate({
+      path: 'patients',
+      select: 'fullName gender address',
+    })
+    .populate({
+      path: 'appointments',
+    });
   if (!doctor) return next(new AppError('No doctor for this ID', 404));
   res.status(200);
   res.json({
@@ -72,3 +79,11 @@ exports.removeDoctor = catchAsync(async (req, res, next) => {
     message: 'content deleted successfully',
   });
 });
+
+exports.restrictToAprovedDoctor = (req, res, next) => {
+  if (!req.user.approved)
+    return next(
+      new AppError('Your account is awaiting approval by an admin', 401)
+    );
+  next();
+};

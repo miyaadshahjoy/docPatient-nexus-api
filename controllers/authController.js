@@ -95,7 +95,14 @@ exports.protect = function (Model) {
       token = req.headers.authorization.split(' ').at(-1);
     }
     // Getting role from cookies
-    const role = req.cookies.role;
+    const role =
+      Model.modelName.slice(0, 1).toLocaleLowerCase() +
+      Model.modelName.slice(1);
+
+    if (role !== req.cookies.role)
+      return next(
+        new AppError('You are not authorized to perform this action🚫🚫', 401)
+      );
 
     // TODO: 2) Verification of token
     if (!token)
@@ -138,6 +145,10 @@ const restrict = function (role) {
 // Impl: SIGN UP Handler
 const signup = function (Model) {
   return catchAsync(async (req, res, next) => {
+    // if (req.user.role === 'doctor' && req.user.id) {
+    //   console.log(req.user.role, req.user.id);
+    //   req.body.doctors = req.user.id;
+    // }
     const user = await Model.create(req.body);
 
     // TODO: send Email verification email
@@ -158,6 +169,9 @@ const signin = function (Model) {
     const user = await Model.findOne({ email }).select('+password');
     if (!user || !(await user.correctPassword(password, user.password)))
       return next(new AppError('Incorrect email or password', 401));
+
+    if (Model.modelName === 'Doctor' && !user.approved)
+      return next(new AppError('Your account is not yet approved', 403));
     // TODO: 3) If everything is ok, send token to client
     storeRoleOnCookie(user.role, res);
     // clearRoleFromCookie(res);

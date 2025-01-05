@@ -4,9 +4,10 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const adminsRouter = require('./routes/adminsRouter');
 const doctorsRouter = require('./routes/doctorsRouter');
 const patientsRouter = require('./routes/patientsRouter');
-const adminsRouter = require('./routes/adminsRouter');
+const appointmentRouter = require('./routes/appointmentsRouter');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -43,10 +44,10 @@ app.use(
 );
 
 // routes
+app.use('/api/v1/admins', adminsRouter);
 app.use('/api/v1/doctors', doctorsRouter);
 app.use('/api/v1/patients', patientsRouter);
-app.use('/api/v1/admins', adminsRouter);
-
+app.use('/api/v1/appointments', appointmentRouter);
 app.all('*', (req, res, next) => {
   /*
   res.status(404);

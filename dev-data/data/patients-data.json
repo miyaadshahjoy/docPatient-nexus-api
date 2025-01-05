@@ -1,266 +1,372 @@
 [
   {
-    "fullName": "John Doe",
-    "email": "john.doe@example.com",
-    "phone": "123-456-7890",
-    "profilePicture": "https://example.com/images/john-doe.jpg",
+    "fullName": "Jonathan Smith",
+    "email": "jonathan.smith@example.com",
+    "phone": "+1234567890",
+    "profilePicture": "path/to/profile1.jpg",
     "gender": "Male",
-    "dateOfBirth": "1985-03-15",
-    "bloodGroup": "A+",
-    "allergies": ["Penicillin", "Peanuts"],
-    "chronicConditions": ["Diabetes"],
-    "currentMedications": ["Metformin"],
-    "familyHistory": ["Heart Disease"],
+    "dateOfBirth": "1985-01-15",
+    "bloodGroup": "O+",
+    "allergies": ["Peanuts", "Dust"],
+    "chronicConditions": ["Asthma"],
+    "currentMedications": ["Inhaler"],
+    "familyHistory": ["Diabetes"],
     "emergencyContact": {
-      "name": "Jane Doe",
-      "phone": "987-654-3210",
+      "name": "Emily Smith",
+      "phone": "+1234567891",
       "relationship": "Wife"
     },
     "address": {
-      "street": "123 Elm Street",
-      "city": "Springfield",
-      "state": "IL",
-      "postalCode": "62704"
+      "street": "123 Main St",
+      "city": "New York",
+      "state": "NY",
+      "postalCode": "10001"
     },
     "appointmentHistory": [
       {
-        "doctorId": "64f7385c9f91e89c1e9d7482",
-        "date": "2024-11-20",
-        "reason": "Annual Checkup",
-        "prescription": "Vitamin D supplements"
+        "doctorId": "DOC123456",
+        "date": "2024-12-01",
+        "reason": "Routine check-up",
+        "prescription": "Multivitamins"
       }
     ],
-    "lastVisitDate": "2024-11-20"
+    "lastVisitDate": "2024-12-01",
+    "password": "pass1234",
+    "passwordConfirm": "pass1234",
+    "role": "patient",
+    "active": true
   },
   {
-    "fullName": "Alice Smith",
-    "email": "alice.smith@example.com",
-    "phone": "234-567-8901",
-    "profilePicture": "https://example.com/images/alice-smith.jpg",
+    "fullName": "Samantha Johnson",
+    "email": "samantha.johnson@example.com",
+    "phone": "+1234567892",
+    "profilePicture": "path/to/profile2.jpg",
     "gender": "Female",
-    "dateOfBirth": "1990-07-12",
-    "bloodGroup": "O+",
-    "allergies": ["Dust"],
-    "chronicConditions": ["Asthma"],
-    "currentMedications": ["Inhaler"],
-    "familyHistory": ["Allergies"],
-    "emergencyContact": {
-      "name": "Robert Smith",
-      "phone": "876-543-2109",
-      "relationship": "Husband"
-    },
-    "address": {
-      "street": "456 Oak Avenue",
-      "city": "Chicago",
-      "state": "IL",
-      "postalCode": "60616"
-    },
-    "appointmentHistory": [
-      {
-        "doctorId": "64f7385c9f91e89c1e9d7483",
-        "date": "2024-11-10",
-        "reason": "Wheezing",
-        "prescription": "Inhaler usage instructions"
-      }
-    ],
-    "lastVisitDate": "2024-11-10"
-  },
-  {
-    "fullName": "Michael Johnson",
-    "email": "michael.johnson@example.com",
-    "phone": "345-678-9012",
-    "profilePicture": "https://example.com/images/michael-johnson.jpg",
-    "gender": "Male",
-    "dateOfBirth": "1978-01-20",
-    "bloodGroup": "B+",
-    "allergies": [],
+    "dateOfBirth": "1990-06-10",
+    "bloodGroup": "A-",
+    "allergies": ["Penicillin"],
     "chronicConditions": ["Hypertension"],
-    "currentMedications": ["Amlodipine"],
+    "currentMedications": ["Blood pressure medication"],
     "familyHistory": ["Hypertension"],
     "emergencyContact": {
-      "name": "Sarah Johnson",
-      "phone": "765-432-1098",
-      "relationship": "Daughter"
-    },
-    "address": {
-      "street": "789 Maple Drive",
-      "city": "Houston",
-      "state": "TX",
-      "postalCode": "77002"
-    },
-    "appointmentHistory": [
-      {
-        "doctorId": "64f7385c9f91e89c1e9d7484",
-        "date": "2024-11-15",
-        "reason": "Blood Pressure Check",
-        "prescription": "Adjust dosage of Amlodipine"
-      }
-    ],
-    "lastVisitDate": "2024-11-15"
-  },
-  {
-    "fullName": "Emily Davis",
-    "email": "emily.davis@example.com",
-    "phone": "456-789-0123",
-    "profilePicture": "https://example.com/images/emily-davis.jpg",
-    "gender": "Female",
-    "dateOfBirth": "1992-04-25",
-    "bloodGroup": "AB+",
-    "allergies": ["Gluten"],
-    "chronicConditions": [],
-    "currentMedications": [],
-    "familyHistory": ["Celiac Disease"],
-    "emergencyContact": {
-      "name": "Daniel Davis",
-      "phone": "654-321-0987",
+      "name": "Mark Johnson",
+      "phone": "+1234567893",
       "relationship": "Brother"
     },
     "address": {
-      "street": "321 Pine Street",
+      "street": "456 Elm St",
       "city": "Los Angeles",
       "state": "CA",
       "postalCode": "90001"
     },
     "appointmentHistory": [
       {
-        "doctorId": "64f7385c9f91e89c1e9d7485",
-        "date": "2024-10-30",
-        "reason": "Abdominal Pain",
-        "prescription": "Gluten-free diet plan"
+        "doctorId": "DOC123457",
+        "date": "2024-11-20",
+        "reason": "Follow-up",
+        "prescription": "Blood pressure meds"
       }
     ],
-    "lastVisitDate": "2024-10-30"
+    "lastVisitDate": "2024-11-20",
+    "password": "pass1234",
+    "passwordConfirm": "pass1234",
+    "role": "patient",
+    "active": true
   },
   {
-    "fullName": "David Wilson",
-    "email": "david.wilson@example.com",
-    "phone": "567-890-1234",
-    "profilePicture": "https://example.com/images/david-wilson.jpg",
+    "fullName": "Michael Brown",
+    "email": "michael.brown@example.com",
+    "phone": "+1234567894",
+    "profilePicture": "path/to/profile3.jpg",
     "gender": "Male",
-    "dateOfBirth": "1965-12-10",
-    "bloodGroup": "O-",
-    "allergies": [],
-    "chronicConditions": ["Arthritis"],
-    "currentMedications": ["Painkillers"],
-    "familyHistory": ["Arthritis"],
+    "dateOfBirth": "1980-03-25",
+    "bloodGroup": "B+",
+    "allergies": ["Cats"],
+    "chronicConditions": ["None"],
+    "currentMedications": ["None"],
+    "familyHistory": ["Heart Disease"],
     "emergencyContact": {
-      "name": "Laura Wilson",
-      "phone": "543-210-9876",
-      "relationship": "Spouse"
+      "name": "Laura Brown",
+      "phone": "+1234567895",
+      "relationship": "Wife"
     },
     "address": {
-      "street": "654 Cedar Lane",
-      "city": "Miami",
-      "state": "FL",
-      "postalCode": "33101"
+      "street": "789 Pine St",
+      "city": "Chicago",
+      "state": "IL",
+      "postalCode": "60601"
     },
     "appointmentHistory": [
       {
-        "doctorId": "64f7385c9f91e89c1e9d7486",
-        "date": "2024-11-05",
-        "reason": "Joint Pain",
-        "prescription": "Physical therapy sessions"
+        "doctorId": "DOC123458",
+        "date": "2024-10-15",
+        "reason": "Back pain",
+        "prescription": "Painkillers"
       }
     ],
-    "lastVisitDate": "2024-11-05"
+    "lastVisitDate": "2024-10-15",
+    "password": "pass1234",
+    "passwordConfirm": "pass1234",
+    "role": "patient",
+    "active": true
   },
   {
-    "fullName": "Sophia Martinez",
-    "email": "sophia.martinez@example.com",
-    "phone": "678-901-2345",
-    "profilePicture": "https://example.com/images/sophia-martinez.jpg",
+    "fullName": "Emily Davis",
+    "email": "emily.davis@example.com",
+    "phone": "+1234567896",
+    "profilePicture": "path/to/profile4.jpg",
     "gender": "Female",
-    "dateOfBirth": "2000-06-15",
-    "bloodGroup": "O+",
-    "allergies": [],
-    "chronicConditions": ["Anemia"],
-    "currentMedications": ["Iron Supplements"],
-    "familyHistory": ["Anemia"],
+    "dateOfBirth": "1975-09-18",
+    "bloodGroup": "AB-",
+    "allergies": ["Gluten"],
+    "chronicConditions": ["Celiac Disease"],
+    "currentMedications": ["Gluten-free diet"],
+    "familyHistory": ["Celiac Disease"],
     "emergencyContact": {
-      "name": "Carlos Martinez",
-      "phone": "654-321-2345",
+      "name": "John Davis",
+      "phone": "+1234567897",
+      "relationship": "Husband"
+    },
+    "address": {
+      "street": "101 Maple St",
+      "city": "Houston",
+      "state": "TX",
+      "postalCode": "77001"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "DOC123459",
+        "date": "2024-09-30",
+        "reason": "Diet consultation",
+        "prescription": "Dietary supplements"
+      }
+    ],
+    "lastVisitDate": "2024-09-30",
+    "password": "pass1234",
+    "passwordConfirm": "pass1234",
+    "role": "patient",
+    "active": true
+  },
+  {
+    "fullName": "Daniel Wilson",
+    "email": "daniel.wilson@example.com",
+    "phone": "+1234567898",
+    "profilePicture": "path/to/profile5.jpg",
+    "gender": "Male",
+    "dateOfBirth": "1965-12-12",
+    "bloodGroup": "O-",
+    "allergies": ["Shellfish"],
+    "chronicConditions": ["Diabetes"],
+    "currentMedications": ["Insulin"],
+    "familyHistory": ["Diabetes"],
+    "emergencyContact": {
+      "name": "Anna Wilson",
+      "phone": "+1234567899",
+      "relationship": "Wife"
+    },
+    "address": {
+      "street": "202 Birch St",
+      "city": "Phoenix",
+      "state": "AZ",
+      "postalCode": "85001"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "DOC123460",
+        "date": "2024-08-10",
+        "reason": "Diabetes management",
+        "prescription": "Insulin"
+      }
+    ],
+    "lastVisitDate": "2024-08-10",
+    "password": "pass1234",
+    "passwordConfirm": "pass1234",
+    "role": "patient",
+    "active": true
+  },
+  {
+    "fullName": "Sophia Martin",
+    "email": "sophia.martin@example.com",
+    "phone": "+1234567800",
+    "profilePicture": "path/to/profile6.jpg",
+    "gender": "Female",
+    "dateOfBirth": "2000-05-14",
+    "bloodGroup": "A+",
+    "allergies": ["Latex"],
+    "chronicConditions": ["None"],
+    "currentMedications": ["None"],
+    "familyHistory": ["None"],
+    "emergencyContact": {
+      "name": "James Martin",
+      "phone": "+1234567801",
       "relationship": "Father"
     },
     "address": {
-      "street": "159 Evergreen Terrace",
-      "city": "Austin",
-      "state": "TX",
-      "postalCode": "78701"
+      "street": "303 Walnut St",
+      "city": "Philadelphia",
+      "state": "PA",
+      "postalCode": "19101"
     },
     "appointmentHistory": [
       {
-        "doctorId": "64f7385c9f91e89c1e9d7487",
-        "date": "2024-11-25",
-        "reason": "Fatigue",
-        "prescription": "Iron supplements"
-      }
-    ],
-    "lastVisitDate": "2024-11-25"
-  },
-  {
-    "fullName": "Liam Harris",
-    "email": "liam.harris@example.com",
-    "phone": "901-234-5678",
-    "profilePicture": "https://example.com/images/liam-harris.jpg",
-    "gender": "Male",
-    "dateOfBirth": "1995-10-05",
-    "bloodGroup": "AB-",
-    "allergies": ["Latex"],
-    "chronicConditions": [],
-    "currentMedications": [],
-    "familyHistory": [],
-    "emergencyContact": {
-      "name": "Emma Harris",
-      "phone": "543-210-9876",
-      "relationship": "Sister"
-    },
-    "address": {
-      "street": "357 Oakridge Lane",
-      "city": "Seattle",
-      "state": "WA",
-      "postalCode": "98101"
-    },
-    "appointmentHistory": [
-      {
-        "doctorId": "64f7385c9f91e89c1e9d7488",
-        "date": "2024-11-12",
-        "reason": "Skin Irritation",
-        "prescription": "Latex-free products"
-      }
-    ],
-    "lastVisitDate": "2024-11-12"
-  },
-  {
-    "fullName": "Olivia Brown",
-    "email": "olivia.brown@example.com",
-    "phone": "345-678-9123",
-    "profilePicture": "https://example.com/images/olivia-brown.jpg",
-    "gender": "Female",
-    "dateOfBirth": "1998-08-01",
-    "bloodGroup": "A-",
-    "allergies": ["Seafood"],
-    "chronicConditions": [],
-    "currentMedications": [],
-    "familyHistory": ["Allergies"],
-    "emergencyContact": {
-      "name": "Olivia Clark",
-      "phone": "210-987-6543",
-      "relationship": "Mother"
-    },
-    "address": {
-      "street": "246 Birchwood Road",
-      "city": "Denver",
-      "state": "CO",
-      "postalCode": "80201"
-    },
-    "appointmentHistory": [
-      {
-        "doctorId": "64f7385c9f91e89c1e9d7489",
-        "date": "2024-11-03",
-        "reason": "Allergic Reaction",
+        "doctorId": "DOC123461",
+        "date": "2024-07-15",
+        "reason": "Allergy test",
         "prescription": "Antihistamines"
       }
     ],
-    "lastVisitDate": "2024-11-03"
+    "lastVisitDate": "2024-07-15",
+    "password": "pass1234",
+    "passwordConfirm": "pass1234",
+    "role": "patient",
+    "active": true
+  },
+  {
+    "fullName": "James Anderson",
+    "email": "james.anderson@example.com",
+    "phone": "+1234567802",
+    "profilePicture": "path/to/profile7.jpg",
+    "gender": "Male",
+    "dateOfBirth": "1988-11-30",
+    "bloodGroup": "B-",
+    "allergies": ["None"],
+    "chronicConditions": ["None"],
+    "currentMedications": ["None"],
+    "familyHistory": ["None"],
+    "emergencyContact": {
+      "name": "Laura Anderson",
+      "phone": "+1234567803",
+      "relationship": "Sister"
+    },
+    "address": {
+      "street": "404 Cedar St",
+      "city": "San Antonio",
+      "state": "TX",
+      "postalCode": "78201"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "DOC123462",
+        "date": "2024-06-20",
+        "reason": "Routine check-up",
+        "prescription": "None"
+      }
+    ],
+    "lastVisitDate": "2024-06-20",
+    "password": "pass1234",
+    "passwordConfirm": "pass1234",
+    "role": "patient",
+    "active": true
+  },
+  {
+    "fullName": "Isabella Thomas",
+    "email": "isabella.thomas@example.com",
+    "phone": "+1234567804",
+    "profilePicture": "path/to/profile8.jpg",
+    "gender": "Female",
+    "dateOfBirth": "1995-07-22",
+    "bloodGroup": "AB+",
+    "allergies": ["Pollens"],
+    "chronicConditions": ["None"],
+    "currentMedications": ["None"],
+    "familyHistory": ["None"],
+    "emergencyContact": {
+      "name": "David Thomas",
+      "phone": "+1234567805",
+      "relationship": "Husband"
+    },
+    "address": {
+      "street": "505 Cherry St",
+      "city": "San Diego",
+      "state": "CA",
+      "postalCode": "92101"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "DOC123463",
+        "date": "2024-05-05",
+        "reason": "Allergy consultation",
+        "prescription": "Antihistamines"
+      }
+    ],
+    "lastVisitDate": "2024-05-05",
+    "password": "pass1234",
+    "passwordConfirm": "pass1234",
+    "role": "patient",
+    "active": true
+  },
+  {
+    "fullName": "Olivia Martinez",
+    "email": "olivia.martinez@example.com",
+    "phone": "+1234567806",
+    "profilePicture": "path/to/profile9.jpg",
+    "gender": "Female",
+    "dateOfBirth": "1992-03-10",
+    "bloodGroup": "O+",
+    "allergies": ["None"],
+    "chronicConditions": ["None"],
+    "currentMedications": ["None"],
+    "familyHistory": ["Hypertension"],
+    "emergencyContact": {
+      "name": "Carlos Martinez",
+      "phone": "+1234567807",
+      "relationship": "Brother"
+    },
+    "address": {
+      "street": "606 Aspen St",
+      "city": "Dallas",
+      "state": "TX",
+      "postalCode": "75201"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "DOC123464",
+        "date": "2024-04-20",
+        "reason": "General consultation",
+        "prescription": "None"
+      }
+    ],
+    "lastVisitDate": "2024-04-20",
+    "password": "pass1234",
+    "passwordConfirm": "pass1234",
+    "role": "patient",
+    "active": true
+  },
+  {
+    "fullName": "William Harris",
+    "email": "william.harris@example.com",
+    "phone": "+1234567808",
+    "profilePicture": "path/to/profile10.jpg",
+    "gender": "Male",
+    "dateOfBirth": "1987-08-25",
+    "bloodGroup": "A-",
+    "allergies": ["Nuts"],
+    "chronicConditions": ["None"],
+    "currentMedications": ["None"],
+    "familyHistory": ["None"],
+    "emergencyContact": {
+      "name": "Emma Harris",
+      "phone": "+1234567809",
+      "relationship": "Wife"
+    },
+    "address": {
+      "street": "707 Oak St",
+      "city": "San Jose",
+      "state": "CA",
+      "postalCode": "95101"
+    },
+    "appointmentHistory": [
+      {
+        "doctorId": "DOC123465",
+        "date": "2024-03-15",
+        "reason": "Nutrition advice",
+        "prescription": "Vitamins"
+      }
+    ],
+    "lastVisitDate": "2024-03-15",
+    "password": "pass1234",
+    "passwordConfirm": "pass1234",
+    "role": "patient",
+    "active": true
   }
 ]
