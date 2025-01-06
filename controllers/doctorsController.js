@@ -79,11 +79,3 @@ exports.removeDoctor = catchAsync(async (req, res, next) => {
     message: 'content deleted successfully',
   });
 });
-
-exports.restrictToAprovedDoctor = (req, res, next) => {
-  if (!req.user.approved)
-    return next(
-      new AppError('Your account is awaiting approval by an admin', 401)
-    );
-  next();
-};

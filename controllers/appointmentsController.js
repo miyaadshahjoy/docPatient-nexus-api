@@ -3,8 +3,9 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
 exports.createAppointment = catchAsync(async (req, res, next) => {
+  req.body.doctor = req.params.doctorId;
+  req.body.patient = req.user.id;
   const newAppointment = await Appointment.create(req.body);
-
   res.status(201);
   res.json({
     status: 'success',

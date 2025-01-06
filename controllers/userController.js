@@ -74,6 +74,28 @@ const deleteUserAccount = function (Model) {
   });
 };
 
+exports.restrictToAprovedUser = (req, res, next) => {
+  if (!req.user.approved)
+    return next(
+      new AppError('Your account is awaiting approval by an admin', 401)
+    );
+  next();
+};
+
+exports.currentUserAccount = (Model) => {
+  return catchAsync(async (req, res, next) => {
+    const currentUser = await Model.findById(req.user._id);
+
+    res.status(200);
+    res.json({
+      status: 'success',
+      data: {
+        data: currentUser,
+      },
+    });
+  });
+};
+
 // UPDATE USER ACCOUNTS
 exports.updateAdminAccount = updateUserAccount(Admin);
 exports.updateDoctorAccount = updateUserAccount(Doctor);

@@ -3,7 +3,10 @@ const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 
 exports.createReview = catchAsync(async (req, res, next) => {
+  req.body.doctor = req.params.doctorId;
+  req.body.patient = req.user.id;
   req.body.appointment = req.params.appointId;
+  console.log(req.params);
   const newReview = await Review.create(req.body);
 
   res.status(201);

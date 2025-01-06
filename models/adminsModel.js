@@ -52,6 +52,10 @@ const adminSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  approved: {
+    type: Boolean,
+    default: false,
+  },
   ///////////////////////////////////
 
   passwordChangedAt: Date,

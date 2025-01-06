@@ -98,7 +98,7 @@ exports.protect = function (Model) {
     const role =
       Model.modelName.slice(0, 1).toLocaleLowerCase() +
       Model.modelName.slice(1);
-
+    console.log(Model.modelName, role, req.cookies);
     if (role !== req.cookies.role)
       return next(
         new AppError('You are not authorized to perform this action🚫🚫', 401)
@@ -169,8 +169,8 @@ const signin = function (Model) {
     const user = await Model.findOne({ email }).select('+password');
     if (!user || !(await user.correctPassword(password, user.password)))
       return next(new AppError('Incorrect email or password', 401));
-
-    if (Model.modelName === 'Doctor' && !user.approved)
+    console.log(user);
+    if (!user.approved)
       return next(new AppError('Your account is not yet approved', 403));
     // TODO: 3) If everything is ok, send token to client
     storeRoleOnCookie(user.role, res);

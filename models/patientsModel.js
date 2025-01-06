@@ -113,7 +113,10 @@ const patientSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
-
+    approved: {
+      type: Boolean,
+      default: false,
+    },
     ///////////////////////////
     passwordChangedAt: Date,
     passwordResetToken: String,
