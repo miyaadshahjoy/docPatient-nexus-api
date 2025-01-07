@@ -1,37 +1,24 @@
 const Appointment = require('./../models/appointmentsModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
+const factory = require('./../controllers/handlerFactory');
 
-exports.createAppointment = catchAsync(async (req, res, next) => {
+exports.getAllAppointments = factory.readAllDocuments(Appointment);
+
+exports.getAppointment = factory.readDocument(Appointment, [
+  {
+    path: 'patient',
+    select: 'fullName gender address ',
+  },
+  {
+    path: 'doctor',
+    select: 'fullName experience specialization averageRating',
+  },
+]);
+exports.getDoctorPatientIds = (req, res, next) => {
   req.body.doctor = req.params.doctorId;
   req.body.patient = req.user.id;
-  const newAppointment = await Appointment.create(req.body);
-  res.status(201);
-  res.json({
-    status: 'success',
-    data: {
-      data: newAppointment,
-    },
-  });
-});
-
-exports.getAppointment = catchAsync(async (req, res, next) => {
-  const id = req.params.id;
-  const appointment = await Appointment.findById(id)
-    .populate({
-      path: 'patient',
-      select: 'fullName gender address ',
-    })
-    .populate({
-      path: 'doctor',
-      select: 'fullName experience specialization averageRating',
-    });
-
-  res.status(200);
-  res.json({
-    status: 'success',
-    data: {
-      data: appointment,
-    },
-  });
-});
+};
+exports.createAppointment = factory.createOne(Appointment);
+exports.updateAppointment = factory.updateOne(Appointment);
+exports.deleteAppointment = factory.deleteOne(Appointment);

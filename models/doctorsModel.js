@@ -114,6 +114,11 @@ const doctorSchema = new mongoose.Schema(
   }
 );
 
+// Indexes
+
+doctorSchema.index({ experience: 1 });
+doctorSchema.index({ averageRating: 1 });
+
 // middlewares
 
 // virtual populate

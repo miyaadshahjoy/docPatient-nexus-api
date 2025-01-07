@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const superAdminRouter = require('./routes/superAdminsRouter');
 const adminsRouter = require('./routes/adminsRouter');
 const doctorsRouter = require('./routes/doctorsRouter');
 const patientsRouter = require('./routes/patientsRouter');
@@ -44,6 +45,7 @@ app.use(
 );
 
 // routes
+app.use('/api/v1/super-admins', superAdminRouter);
 app.use('/api/v1/admins', adminsRouter);
 app.use('/api/v1/doctors', doctorsRouter);
 app.use('/api/v1/patients', patientsRouter);

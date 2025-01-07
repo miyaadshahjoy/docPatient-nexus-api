@@ -6,6 +6,7 @@ const Patient = require('./../models/patientsModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const sendEmail = require('./../utils/email');
+const SuperAdmin = require('../models/superAdminModel');
 
 // Impl: sign token
 const signToken = (id) => {
@@ -43,17 +44,6 @@ const clearRoleFromCookie = function (res) {
   res.clearCookie('role');
 };*/
 
-// Impl: Filter Object
-const filterObject = function (obj, notAllowedFields) {
-  const filteredObject = {};
-  Object.keys(obj).forEach((el) => {
-    if (!notAllowedFields.includes(el)) {
-      filteredObject[el] = obj[el];
-    }
-  });
-  return filteredObject;
-};
-
 // Impl: Email Verification
 const sendEmailVerificationToken = async function (req, next, user) {
   // TODO: 1) Create email verification token
@@ -84,51 +74,53 @@ const sendEmailVerificationToken = async function (req, next, user) {
 };
 
 // Impl: Protect routes
-exports.protect = function (Model) {
-  return catchAsync(async (req, res, next) => {
-    // TODO: 1) Getting the JWT token and check if it's there
-    let token;
-    if (
-      req.headers.authorization &&
-      req.headers.authorization.startsWith('Bearer')
-    ) {
-      token = req.headers.authorization.split(' ').at(-1);
-    }
-    // Getting role from cookies
-    const role =
-      Model.modelName.slice(0, 1).toLocaleLowerCase() +
-      Model.modelName.slice(1);
-    console.log(Model.modelName, role, req.cookies);
-    if (role !== req.cookies.role)
-      return next(
-        new AppError('You are not authorized to perform this action🚫🚫', 401)
-      );
+exports.protect = catchAsync(async (req, res, next) => {
+  // TODO: 1) Getting the JWT token and check if it's there
+  let token;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith('Bearer')
+  ) {
+    token = req.headers.authorization.split(' ').at(-1);
+  }
+  // Getting role from cookies
+  const role = req.cookies.role;
+  console.log(role, req.cookies);
+  if (role === 'superAdmin') {
+    Model = SuperAdmin;
+  } else if (role === 'admin') {
+    Model = Admin;
+  } else if (role === 'doctor') {
+    Model = Doctor;
+  } else if (role === 'patient') {
+    Model = Patient;
+  }
+  // if (role !== req.cookies.role)
+  //   return next(
+  //     new AppError('You are not authorized to perform this action🚫🚫', 401)
+  //   );
 
-    // TODO: 2) Verification of token
-    if (!token)
-      return next(new AppError('The token is invalid or has expired', 401));
-    // TODO: 3) Check if user still exists
-    const decodedDocument = jwt.verify(token, process.env.JWT_SECRET_KEY);
+  // TODO: 2) Verification of token
+  if (!token)
+    return next(new AppError('The token is invalid or has expired', 401));
+  // TODO: 3) Check if user still exists
+  const decodedDocument = jwt.verify(token, process.env.JWT_SECRET_KEY);
 
-    const currentUser = await Model.findById(decodedDocument.id);
+  const currentUser = await Model.findById(decodedDocument.id);
 
-    if (!currentUser)
-      return next(
-        new AppError(
-          'The user belonging to this token does no longer exist',
-          401
-        )
-      );
-    // TODO: 4) Check if user changed password after the token was issued
+  if (!currentUser)
+    return next(
+      new AppError('The user belonging to this token does no longer exist', 401)
+    );
+  // TODO: 4) Check if user changed password after the token was issued
 
-    if (currentUser.passwordChangedAfter(decodedDocument.iat))
-      return next(
-        new AppError('User changed password recently. Please login again!', 401)
-      );
-    req.user = currentUser;
-    next();
-  });
-};
+  if (currentUser.passwordChangedAfter(decodedDocument.iat))
+    return next(
+      new AppError('User changed password recently. Please login again!', 401)
+    );
+  req.user = currentUser;
+  next();
+});
 
 // Impl: Authorization
 const restrict = function (role) {
@@ -167,9 +159,10 @@ const signin = function (Model) {
       return next(new AppError('Please provide email and password', 400));
     // TODO: 2) Check if admin exists and password is correct
     const user = await Model.findOne({ email }).select('+password');
+    console.log(user);
     if (!user || !(await user.correctPassword(password, user.password)))
       return next(new AppError('Incorrect email or password', 401));
-    console.log(user);
+    // console.log(user);
     if (!user.approved)
       return next(new AppError('Your account is not yet approved', 403));
     // TODO: 3) If everything is ok, send token to client
@@ -194,7 +187,8 @@ exports.forgotPassword = function (Model) {
     await currentUser.save({ validateBeforeSave: false });
     // TODO: 3) Send it to user's email
     const resource =
-      `${Model}`.slice(0, 1).toLocaleLowerCase() + `${Model}`.slice(1);
+      `${Model.modelName}`.slice(0, 1).toLocaleLowerCase() +
+      `${Model.modelName}`.slice(1);
     const resetUrl = `${req.protocol}://${req.hostname}/api/v1/${resource}/resetPassword/${resetToken}`;
     const message = `Forgot password? Send a POST request with password and passwodConfirm to: ${resetUrl}\nIf you didn't forget your password, ignore this email`;
 
@@ -227,7 +221,7 @@ exports.forgotPassword = function (Model) {
 
 exports.resetPassword = function (Model) {
   return catchAsync(async (req, res, next) => {
-    const { currentPassword, newPassword, newPasswordConfirm } = req.body;
+    const { newPassword, newPasswordConfirm } = req.body;
     const resetToken = req.params.resetToken;
 
     // TODO: 1) Get user based on the token
@@ -242,20 +236,13 @@ exports.resetPassword = function (Model) {
 
     if (!currentUser)
       return next(new AppError('Token is invalid or has expired', 400));
-    if (
-      !(await currentUser.correctPassword(
-        currentPassword,
-        currentUser.password
-      ))
-    )
-      return next(new AppError('Incorrect current password', 400));
 
     // TODO: 2) If token has not expired, and there is user, set the new password
     currentUser.password = newPassword;
     currentUser.passwordConfirm = newPasswordConfirm;
     currentUser.passwordResetToken = undefined;
     currentUser.passwordResetTokenExpire = undefined;
-    await currentUser.save();
+    await currentUser.save({ validateBeforeSave: false });
 
     // TODO: 3) Update passwordChangedAt property for the user
     // TODO: 4) Log the user in, Send JWT
@@ -308,16 +295,19 @@ exports.updatePassword = function (Model) {
 };
 
 // SIGN UP
+exports.signupSuperAdmin = signup(SuperAdmin);
 exports.signupAdmin = signup(Admin);
 exports.signupDoctor = signup(Doctor);
 exports.signupPatient = signup(Patient);
 
 // SIGN IN
+exports.signinSuperAdmin = signin(SuperAdmin);
 exports.signinAdmin = signin(Admin);
 exports.signinDoctor = signin(Doctor);
 exports.signinPatient = signin(Patient);
 
 // AUTHORIZE
+exports.restrictToSuperAdmin = restrict('superAdmin');
 exports.restrictToAdmin = restrict('admin');
 exports.restrictToDoctor = restrict('doctor');
 exports.restrictToPatient = restrict('patient');

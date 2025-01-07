@@ -1,5 +1,5 @@
-const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
+const bcrypt = require('bcryptjs');
 const instanceMethodsPlugin = (schema) => {
   // Impl: Check if password is correct
   schema.methods.correctPassword = async function (

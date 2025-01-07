@@ -1,24 +1,20 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
-
 const instanceMethodsPlugin = require('../utils/instanceMethodsPlugin');
 const passwordEncryption = require('../utils/passwordEncryption');
 const passwordChangedAtModify = require('./../utils/passwordChangedAtModify');
 
-// TODO: Admin Schema
-const adminSchema = new mongoose.Schema({
-  fullname: {
+const superAdminSchema = new mongoose.Schema({
+  fullName: {
     type: String,
-    unique: true, // The unique Option is Not a Validator
-    required: [true, 'Admin must provide a name'],
-    minlength: [10, 'Name should contain atleast 10 characters'],
-    maxlength: [30, 'Name should not contain more than 30 characters'],
+    unique: true,
+    required: [true, 'A super admin must provide a name'],
   },
   email: {
     type: String,
-    required: [true, 'Admin must provide an email'],
     unique: true,
     lowercase: true,
+    required: [true, 'A super admin must provide an email'],
     validate: [validator.isEmail, 'Please provide a valid email'],
   },
   phone: {
@@ -29,24 +25,24 @@ const adminSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: [8, 'Password must contain atleast 8 characters!'],
+    minlength: [8, 'Password must contain atleast 8 characters'],
     select: false,
   },
   passwordConfirm: {
     type: String,
     required: true,
     validate: {
-      validator: function (el) {
-        return el === this.password;
+      validator: function (value) {
+        return value === this.password;
       },
       message: 'Passwords are not the same...🚫🚫',
     },
   },
-  passwordChangedAt: Date,
+
   role: {
     type: String,
     required: true,
-    default: 'admin',
+    default: 'superAdmin',
   },
   active: {
     type: Boolean,
@@ -54,7 +50,7 @@ const adminSchema = new mongoose.Schema({
   },
   approved: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   ///////////////////////////////////
 
@@ -70,13 +66,12 @@ const adminSchema = new mongoose.Schema({
 });
 
 // middlewares
-adminSchema.pre('save', passwordEncryption);
+superAdminSchema.pre('save', passwordEncryption);
 
 // Instance methods
-adminSchema.plugin(instanceMethodsPlugin);
-adminSchema.pre('save', passwordChangedAtModify);
+superAdminSchema.plugin(instanceMethodsPlugin);
+superAdminSchema.pre('save', passwordChangedAtModify);
 
-// Admin Model
-const Admin = mongoose.model('Admin', adminSchema);
+const SuperAdmin = mongoose.model('SuperAdmin', superAdminSchema);
 
-module.exports = Admin;
+module.exports = SuperAdmin;

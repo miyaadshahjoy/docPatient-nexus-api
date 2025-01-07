@@ -5,6 +5,7 @@ const Patient = require('./../models/patientsModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const sendEmail = require('./../utils/email');
+const SuperAdmin = require('../models/superAdminModel');
 
 // Impl: sign token
 const signToken = (id) => {
@@ -25,6 +26,16 @@ const sendToken = (user, statusCode, res) => {
     },
   });
 };
+// Impl: Filter Object
+const filterObject = function (obj, notAllowedFields) {
+  const filteredObject = {};
+  Object.keys(obj).forEach((el) => {
+    if (!notAllowedFields.includes(el)) {
+      filteredObject[el] = obj[el];
+    }
+  });
+  return filteredObject;
+};
 
 // Impl: Update current user account
 const updateUserAccount = function (Model) {
@@ -33,7 +44,7 @@ const updateUserAccount = function (Model) {
     if (req.body.password)
       return next(
         new AppError(
-          'You can not update your password from this route. You can use the /updatePassword route',
+          'You can not update your password from this route. You can use the /update-password route',
           400
         )
       );
@@ -43,6 +54,7 @@ const updateUserAccount = function (Model) {
       'role',
       'averageRating',
       'emailVerified',
+      'approved',
     ];
     const filteredObject = filterObject(req.body, notAllowedFields);
 
@@ -82,7 +94,7 @@ exports.restrictToAprovedUser = (req, res, next) => {
   next();
 };
 
-exports.currentUserAccount = (Model) => {
+const currentUserAccount = (Model) => {
   return catchAsync(async (req, res, next) => {
     const currentUser = await Model.findById(req.user._id);
 
@@ -96,12 +108,20 @@ exports.currentUserAccount = (Model) => {
   });
 };
 
-// UPDATE USER ACCOUNTS
+// GET CURRENT USER ACCOUNTS
+exports.getSuperAdminAccount = currentUserAccount(SuperAdmin);
+exports.getAdminAccount = currentUserAccount(Admin);
+exports.getDoctorAccount = currentUserAccount(Doctor);
+exports.getPatientAccount = currentUserAccount(Patient);
+
+// UPDATE CURRENT USER ACCOUNTS
+exports.updateSuperAdminAccount = updateUserAccount(SuperAdmin);
 exports.updateAdminAccount = updateUserAccount(Admin);
 exports.updateDoctorAccount = updateUserAccount(Doctor);
 exports.updatePatientAccount = updateUserAccount(Patient);
 
-// DELETE USER ACCOUNTS
+// DELETE CURRENT USER ACCOUNTS
+exports.deleteSuperAdminAccount = deleteUserAccount(SuperAdmin);
 exports.deleteAdminAccount = deleteUserAccount(Admin);
 exports.deleteDoctorAccount = deleteUserAccount(Doctor);
 exports.deletePatientAccount = deleteUserAccount(Patient);

@@ -1,28 +1,55 @@
 const express = require('express');
-const authController = require('./../controllers/authController');
-const userController = require('./../controllers/userController');
-const adminsController = require('./../controllers/adminsController');
+const authController = require('../controllers/authController');
+const userController = require('../controllers/userController');
+const adminsController = require('../controllers/adminsController');
 const Admin = require('../models/adminsModel');
-const Doctor = require('./../models/doctorsModel');
-const Patient = require('./../models/patientsModel');
+const Doctor = require('../models/doctorsModel');
+const Patient = require('../models/patientsModel');
 
-const router = express.Router('/api/v1/admins');
+const router = express.Router();
 
+// ========== Authentication Routes ==========
 router.post('/signup', authController.signupAdmin);
 router.post('/signin', authController.signinAdmin);
 
-router.use(authController.protect(Admin));
-router.get('/verifyEmail/:verificationToken', authController.verifyEmail);
+// ========== Password Reset Routes ==========
+router.post('/forgot-password', authController.forgotPassword(Admin));
+router.post('/reset-password/:resetToken', authController.resetPassword(Admin));
 
-router.post('/forgotPassword', authController.forgotPassword(Admin));
-router.post('/resetPassword/:resetToken', authController.resetPassword(Admin));
+// ========== Protected Routes (Require Authentication) ==========
+router.use(authController.protect);
 
-router.get('/currentUserAccount', userController.currentUserAccount(Admin));
-router.post('/updateAccount', userController.updateAdminAccount);
-router.post('/updatePassword', authController.updatePassword(Admin));
-router.delete('/deleteAccount', userController.deleteAdminAccount);
+// ========== Email Verification Route ==========
+router.get(
+  '/verify-email/:verificationToken',
+  authController.restrictToAdmin,
+  authController.verifyEmail
+);
 
-// Endpoint for approving a Doctor
-router.patch('/approveDoctor/:id', adminsController.approveUser(Doctor));
-router.patch('/approvePatient/:id', adminsController.approveUser(Patient));
+// ========== Admin Account Management ==========
+router
+  .route('/account')
+  .get(authController.restrictToAdmin, userController.getAdminAccount)
+  .patch(authController.restrictToAdmin, userController.updateAdminAccount)
+  .delete(authController.restrictToAdmin, userController.deleteAdminAccount);
+
+router
+  .route('/account/password')
+  .patch(authController.restrictToAdmin, authController.updatePassword(Admin));
+
+// ========== Approving Doctors and Patients ==========
+router.patch('/approve-doctor/:id', adminsController.approveUser(Doctor));
+router.patch('/approve-patient/:id', adminsController.approveUser(Patient));
+
+// ========== Super Admin Routes ==========
+router.use(authController.restrictToSuperAdmin);
+
+router.route('/').get(adminsController.getAllAdmins);
+
+router
+  .route('/:id')
+  .get(adminsController.getAdmin)
+  .patch(adminsController.updateAdmin)
+  .delete(adminsController.deleteAdmin);
+
 module.exports = router;

@@ -3,60 +3,76 @@ const patientsController = require('./../controllers/patientsController');
 const Patient = require('./../models/patientsModel');
 const authController = require('./../controllers/authController');
 const userController = require('./../controllers/userController');
-
-const Doctor = require('../models/doctorsModel');
-const Admin = require('../models/adminsModel');
+const Appointment = require('../models/appointmentsModel');
+const {
+  readAllDocuments,
+  readDocument,
+} = require('./../controllers/handlerFactory');
+// Router
 const router = express.Router();
 
-// Endpoints for Patients SIGNUP and SIGNIN
+//===================== Authentication Routes ==========================
 router.post('/signup', authController.signupPatient);
 router.post('/signin', authController.signinPatient);
 
-// Only a SIGNED IN Patient can access these Endpoints
-router.use(authController.protect(Patient));
-router.get('/verifyEmail/:verificationToken', authController.verifyEmail);
-
-router.use(userController.restrictToAprovedUser);
-
-router.post('/forgotPassword', authController.forgotPassword(Patient));
-router.post(
-  '/resetPassword/:resetToken',
+// ===================== Password Reset Routes =============================
+router.post('/forgot-password', authController.forgotPassword(Patient));
+router.patch(
+  '/reset-password/:resetToken',
   authController.resetPassword(Patient)
 );
 
-router.get('/currentUserAccount', userController.currentUserAccount(Patient));
-router.post('/updatePassword', authController.updatePassword(Patient));
-router.post('/updateAccount', userController.updatePatientAccount);
-router.delete('/deleteAccount', userController.deletePatientAccount);
+// =============== Protected Routes (Requires Authentication) ==============
+router.use(authController.protect);
 
-// Only an Admin can access these Endpoints
+// ===================== Route for Email verification =======================
+router.get('/verify-email/:verificationToken', authController.verifyEmail);
+
+router.use(userController.restrictToAprovedUser);
+
+// =================== Patient Account Management =========================
+
+router
+  .route('/account')
+  .get(authController.restrictToPatient, userController.getPatientAccount)
+  .patch(authController.restrictToPatient, userController.updatePatientAccount)
+  .delete(
+    authController.restrictToPatient,
+    userController.deletePatientAccount
+  );
+router
+  .route('/account/password')
+  .patch(
+    authController.restrictToPatient,
+    authController.updatePassword(Patient)
+  );
+
+// ===================== Get Appointments on a Doctor ========================
+router
+  .route('/appointments')
+  .get(authController.restrictToPatient, (req, res, next) => {
+    readAllDocuments(Appointment, { patient: req.user.id })(req, res, next);
+  });
+
+router
+  .route('/appointments/:id')
+  .get(authController.restrictToPatient, (req, res, next) => {
+    readDocument(Appointment, undefined, { patient: req.user.id })(
+      req,
+      res,
+      next
+    );
+  });
+
+// ============================ Admin Routes =============================
+
 router
   .route('/')
-  .get(
-    authController.protect(Admin),
-    authController.restrictToAdmin,
-    patientsController.getAllPatients
-  )
-  .post(
-    authController.protect(Admin),
-    authController.restrictToAdmin,
-    patientsController.addPatient
-  );
+  .get(patientsController.getAllPatients)
+  .post(authController.restrictToAdmin, patientsController.addPatient);
 router
   .route('/:id')
-  .get(
-    authController.protect(Admin),
-    authController.restrictToAdmin,
-    patientsController.getPatient
-  )
-  .patch(
-    authController.protect(Admin),
-    authController.restrictToAdmin,
-    patientsController.updatePatient
-  )
-  .delete(
-    authController.protect(Admin),
-    authController.restrictToAdmin,
-    patientsController.removePatient
-  );
+  .get(patientsController.getPatient)
+  .patch(authController.restrictToAdmin, patientsController.updatePatient)
+  .delete(authController.restrictToAdmin, patientsController.removePatient);
 module.exports = router;

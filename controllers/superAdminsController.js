@@ -1,13 +1,5 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('./../utils/appError');
-const Admin = require('../models/adminsModel');
-const factory = require('./../controllers/handlerFactory');
-
-exports.getAllAdmins = factory.readAllDocuments(Admin);
-exports.getAdmin = factory.readDocument(Admin);
-exports.createAdmin = factory.createOne(Admin);
-exports.updateAdmin = factory.updateOne(Admin);
-exports.deleteAdmin = factory.deleteOne(Admin);
 
 exports.approveUser = (Model) => {
   return catchAsync(async (req, res, next) => {
