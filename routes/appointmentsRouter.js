@@ -14,13 +14,30 @@ router
   .post(
     authController.restrictToPatient,
     appointmentsController.getDoctorPatientIds,
-    appointmentsController.createAppointment
+    appointmentsController.getAvailableTimeSlots,
+    appointmentsController.checkTimeSlot,
+    appointmentsController.bookAppointment
   )
   .get(
     authController.restrictToAdmin,
     appointmentsController.getAllAppointments
   );
-
+router
+  .route('/time-slots')
+  .post(
+    authController.restrictToPatient,
+    appointmentsController.getAvailableTimeSlots,
+    (req, res, next) => {
+      res.status(200);
+      res.json({
+        status: 'success',
+        results: req.availableTimeSlots.length,
+        data: {
+          availableTimeSlots: req.availableTimeSlots,
+        },
+      });
+    }
+  );
 router
   .route('/:id')
   .get(authController.restrictToAdmin, appointmentsController.getAppointment)
