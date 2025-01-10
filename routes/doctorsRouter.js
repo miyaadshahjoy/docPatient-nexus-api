@@ -13,6 +13,9 @@ const Appointment = require('../models/appointmentsModel');
 
 const router = express.Router();
 
+// public route to get all doctor documents
+router.route('/').get(doctorsController.getAllDoctors);
+
 router.use('/:doctorId/appointments', appointmentsRouter);
 //===================== Authentication Routes ==========================
 router.post('/signup', authController.signupDoctor);
@@ -72,7 +75,7 @@ router
 // ============================ Admin Routes =============================
 router
   .route('/')
-  .get(doctorsController.getAllDoctors)
+  // .get(doctorsController.getAllDoctors)
   .post(authController.restrictToAdmin, doctorsController.addDoctor);
 router
   .route('/:id')
