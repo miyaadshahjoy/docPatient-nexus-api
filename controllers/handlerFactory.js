@@ -4,7 +4,6 @@ const AppError = require('./../utils/appError');
 
 exports.readAllDocuments = (Model, filterOptions) => {
   return catchAsync(async (req, res, next) => {
-    console.log(filterOptions);
     const feature = new APIFeatures(Model.find(filterOptions), req.query)
       .filter()
       .sort()

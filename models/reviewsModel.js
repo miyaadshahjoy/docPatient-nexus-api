@@ -45,7 +45,6 @@ reviewSchema.statics.calculateAverageRatings = async function (doctorId) {
       },
     },
   ]);
-  console.log(reviewStats);
   if (reviewStats.length > 0) {
     await Doctor.findByIdAndUpdate(doctorId, {
       reviewsCount: reviewStats.at(0).nRatings,

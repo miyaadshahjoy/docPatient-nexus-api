@@ -4,7 +4,6 @@ const Doctor = require('./../models/doctorsModel');
 const Patient = require('./../models/patientsModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
-const sendEmail = require('./../utils/email');
 const SuperAdmin = require('../models/superAdminModel');
 
 // Impl: sign token

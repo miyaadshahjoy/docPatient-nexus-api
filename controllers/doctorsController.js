@@ -1,7 +1,5 @@
 const Doctor = require('./../models/doctorsModel');
-const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('./../utils/catchAsync');
-const AppError = require('../utils/appError');
 const factory = require('./../controllers/handlerFactory');
 exports.getAllDoctors = factory.readAllDocuments(Doctor);
 exports.getDoctor = factory.readDocument(Doctor, [
@@ -20,7 +18,7 @@ exports.findDoctorsWithin = catchAsync(async (req, res, next) => {
   const [lat, lng] = req.params.latlng.split(',').map(Number);
   const unit = req.params.unit;
   const radius = unit === 'mi' ? distance / 3963.2 : distance / 6378.1; // radius in radian
-  console.log(radius);
+  // console.log(radius);
 
   const doctors = await Doctor.find({
     workAddress: {
