@@ -123,12 +123,12 @@ exports.protect = catchAsync(async (req, res, next) => {
 });
 
 // Impl: Authorization
-const restrict = function (role) {
+const restrict = function (...roles) {
   return (req, res, next) => {
     const userRole = req.user.role;
-    if (userRole !== role)
+    if (!roles.includes(userRole))
       return next(
-        new AppError(`You are not authorized to perform this action`, 403)
+        new AppError(`You are not authorized to perform this action🙄😑`, 403)
       );
     next();
   };
@@ -311,3 +311,4 @@ exports.restrictToSuperAdmin = restrict('superAdmin');
 exports.restrictToAdmin = restrict('admin');
 exports.restrictToDoctor = restrict('doctor');
 exports.restrictToPatient = restrict('patient');
+exports.restrictToAdminPatient = restrict('admin', 'patient');

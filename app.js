@@ -9,6 +9,7 @@ const adminsRouter = require('./routes/adminsRouter');
 const doctorsRouter = require('./routes/doctorsRouter');
 const patientsRouter = require('./routes/patientsRouter');
 const appointmentRouter = require('./routes/appointmentsRouter');
+const reviewsRouter = require('./routes/reviewsRouter');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
@@ -50,6 +51,7 @@ app.use('/api/v1/admins', adminsRouter);
 app.use('/api/v1/doctors', doctorsRouter);
 app.use('/api/v1/patients', patientsRouter);
 app.use('/api/v1/appointments', appointmentRouter);
+app.use('/api/v1/reviews', reviewsRouter);
 app.all('*', (req, res, next) => {
   /*
   res.status(404);

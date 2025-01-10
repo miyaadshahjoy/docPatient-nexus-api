@@ -4,7 +4,7 @@ const authController = require('./../controllers/authController');
 const userController = require('./../controllers/userController');
 const appointmentsRouter = require('./../routes/appointmentsRouter');
 const Doctor = require('../models/doctorsModel');
-const appointmentsController = require('../controllers/appointmentsController');
+// const appointmentsController = require('../controllers/appointmentsController');
 const {
   readAllDocuments,
   readDocument,
@@ -33,6 +33,13 @@ router.get('/verify-email/:verificationToken', authController.verifyEmail);
 
 router.use(userController.restrictToAprovedUser);
 
+router
+  .route('/doctors-within/:distance/center/:latlng/unit/:unit')
+  .get(authController.restrictToPatient, doctorsController.findDoctorsWithin);
+router
+  .route('/distances/:latlng/unit/:unit')
+  .get(authController.restrictToPatient, doctorsController.getDoctorDistances);
+
 // =================== Doctor Account Management =========================
 router
   .route('/account')
@@ -55,7 +62,7 @@ router
 router
   .route('/appointments/:id')
   .get(authController.restrictToDoctor, (req, res, next) => {
-    readDocument(Appointment, undefined, { doctor: req.user.id })(
+    readDocument(Appointment, { path: 'patient' }, { doctor: req.user.id })(
       req,
       res,
       next

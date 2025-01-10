@@ -57,11 +57,15 @@ router
 router
   .route('/appointments/:id')
   .get(authController.restrictToPatient, (req, res, next) => {
-    readDocument(Appointment, undefined, { patient: req.user.id })(
-      req,
-      res,
-      next
-    );
+    readDocument(
+      Appointment,
+      {
+        path: 'doctor',
+        select:
+          'fullName phone experience specialization qualification workAddress averageRating',
+      },
+      { patient: req.user.id }
+    )(req, res, next);
   });
 
 // ============================ Admin Routes =============================

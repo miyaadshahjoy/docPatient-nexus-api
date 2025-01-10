@@ -17,8 +17,11 @@ router
 
 router
   .route('/:id')
-  .get(reviewsController.getReview)
-  .patch(reviewsController.updateReview)
-  .delete(reviewsController.deleteReview);
+  .get(authController.restrictToPatient, reviewsController.getReview)
+  .patch(authController.restrictToPatient, reviewsController.updateReview)
+  .delete(
+    authController.restrictToAdminPatient,
+    reviewsController.deleteReview
+  );
 
 module.exports = router;

@@ -47,8 +47,15 @@ const doctorSchema = new mongoose.Schema(
       type: String,
     },
     workAddress: {
-      type: Object,
-      required: [true, 'A doctor must provide a working address'],
+      // GeoJSON
+      type: {
+        type: String,
+        default: 'Point',
+        enum: ['Point'],
+      },
+      coordinates: [Number],
+      address: String,
+      description: String,
     },
     availibilitySchedule: {
       type: [Object],
@@ -118,6 +125,7 @@ const doctorSchema = new mongoose.Schema(
 
 doctorSchema.index({ experience: 1 });
 doctorSchema.index({ averageRating: 1 });
+doctorSchema.index({ workAddress: '2dsphere' });
 
 // middlewares
 

@@ -38,8 +38,16 @@ router
   .patch(authController.restrictToAdmin, authController.updatePassword(Admin));
 
 // ========== Approving Doctors and Patients ==========
-router.patch('/approve-doctor/:id', adminsController.approveUser(Doctor));
-router.patch('/approve-patient/:id', adminsController.approveUser(Patient));
+router.patch(
+  '/approve-doctor/:id',
+  authController.restrictToAdmin,
+  adminsController.approveUser(Doctor)
+);
+router.patch(
+  '/approve-patient/:id',
+  authController.restrictToAdmin,
+  adminsController.approveUser(Patient)
+);
 
 // ========== Super Admin Routes ==========
 router.use(authController.restrictToSuperAdmin);
