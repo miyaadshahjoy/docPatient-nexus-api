@@ -1,6 +1,5 @@
 # docPatient-nexus-api
 
-#FE4542
-#FF6B69
-#FECC49
-#FEEF52
+# https://docpatient-nexus-api-production.up.railway.app/api/v1/doctors
+
+
